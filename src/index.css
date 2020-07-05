@@ -1,0 +1,141 @@
+html {
+    height: 100%;
+}
+
+body {
+    font-family: 'Lalezar', cursive;
+    background-color: rgb(53, 160, 155);
+    color: ghostwhite;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-size: 4rem;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+}
+
+#root {
+    width: 100%;
+    height: 80%;
+    text-align: center;
+}
+
+#control-panels-group {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* .control-panel {
+    margin: 10px;
+} */
+
+#display-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border: solid 5px whitesmoke;
+    width: 35vw;
+    height: 35vw;
+    border-radius: 50%;
+    margin: 0 auto;
+    margin-bottom: 2em;
+}
+
+button {
+    color: ghostwhite;
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+button:hover {
+    color: #cacaca;
+}
+
+button:active {
+    color: #cacaca;
+    transform: translateY(4px);
+}
+
+#timer-label {
+    font-size: 4rem;
+    margin: 0 0;
+}
+
+p {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+}
+
+#time-left {
+    font-size: 7rem;
+    margin-block-start: 0;
+    margin-block-end: 0.5em;
+}
+
+.btn-level {
+    display: inline-block;
+}
+
+#break-length, #session-length {
+    width: 4rem;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+#break-label, #session-label {
+    font-size: 2rem;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+@media (max-width: 1200px) {
+    #time-left {
+        font-size: 5rem;
+    }
+}
+
+@media (max-width: 900px) {
+    html {
+        font-size: 90%;
+    }
+    #display-panel {
+        width: 50vmax;
+        height: 50vmax;
+    }
+}
+
+@media (max-width: 450px) {
+    html {
+        font-size: 80%;
+    }
+    #display-panel {
+        width: 80vmin;
+        height: 80vmin;
+    }
+}
+
+@media (max-width: 400px) {
+    html {
+        font-size: 70%;
+    }
+    #display-panel {
+        width: 80vmin;
+        height: 80vmin;
+    }
+}
+
+@media (max-width: 350px) {
+    html {
+        font-size: 60%;
+    }
+    #display-panel {
+        width: 80vmin;
+        height: 80vmin;
+    }
+}
