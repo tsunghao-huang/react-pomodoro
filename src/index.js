@@ -6,7 +6,8 @@ class ControlPanel extends React.Component {
     render() {
         return (
             <div id={`${this.props.value.toLowerCase()}-panel`} className='control-panel'>
-                <h2 id={`${this.props.value.toLowerCase()}-label`}>{`${this.props.value} Length`}</h2>
+                <button id={`default-${this.props.value.toLowerCase()}`} onClick={this.props.handleDefaultBtn}>{`${this.props.value}`}</button>
+                <h2 id={`${this.props.value.toLowerCase()}-label`}>{`Custom ${this.props.value}`}</h2>
                 <button id={`${this.props.value.toLowerCase()}-decrement`} onClick={this.props.handleInDecrement} className='btn-level'>
                     <i className="fa fa-arrow-down fa-2x" aria-hidden="true"></i>
                 </button>
@@ -58,6 +59,7 @@ class App extends React.Component {
         this.handleStartToggle = this.handleStartToggle.bind(this);
         this.tick = this.tick.bind(this);
         this.handleInDecrement = this.handleInDecrement.bind(this);
+        this.handleDefaultBtn = this.handleDefaultBtn.bind(this);
     }
 
     handleReset() {
@@ -78,21 +80,47 @@ class App extends React.Component {
 
         // and set the color back to default, if it is changed
         document.getElementById('time-left').style.color = null;
+
+        // and the title
+        document.getElementsByTagName('title')[0].text = 'Promodoro Clock';
+    }
+
+    handleDefaultBtn(e) {
+        // ignore click, while the clock is counting
+        if (this.state.counting) return;
+        // console.log(e.target.id);
+        if (e.target.id.includes('session')) {
+            this.setState({
+                breakLength: 5,
+                sessionLength: 25,
+                timeLeft: 1500,
+                counting: false,
+                currentCounting: 'Session',
+            });
+        } else {
+            this.setState({
+                breakLength: 5,
+                timeLeft: 300,
+                counting: false,
+                currentCounting: 'Break',
+            });
+        }
     }
 
     handleInDecrement(e) {
+        // in case the clock is still running, disable handleInDecrement()
         if (this.state.counting) return;
-        switch (e.currentTarget.id) {
-            case 'break-decrement':
+        switch (`${e.currentTarget.id},current:${this.state.currentCounting}`) {
+            case 'break-decrement,current:Session':
                 if (this.state.breakLength > 1) {
                     this.setState(state => ({
-                        breakLength: state.breakLength - 1
+                        breakLength: state.breakLength - 1,
                     }));
                     return;
                 } else {
                     return;
                 }
-            case 'break-increment':
+            case 'break-increment,current:Session':
                 if (this.state.breakLength < 60) {
                     this.setState(state => ({
                         breakLength: state.breakLength + 1
@@ -101,7 +129,27 @@ class App extends React.Component {
                 } else {
                     return;
                 }
-            case 'session-decrement':
+            case 'break-decrement,current:Break':
+                if (this.state.breakLength > 1) {
+                    this.setState(state => ({
+                        breakLength: state.breakLength - 1,
+                        timeLeft: state.timeLeft - 60,
+                    }));
+                    return;
+                } else {
+                    return;
+                }
+            case 'break-increment,current:Break':
+                if (this.state.breakLength < 60) {
+                    this.setState(state => ({
+                        breakLength: state.breakLength + 1,
+                        timeLeft: state.timeLeft + 60,
+                    }));
+                    return;
+                } else {
+                    return;
+                }
+            case 'session-decrement,current:Session':
                 if (this.state.sessionLength > 1) {
                     this.setState(state => ({
                         sessionLength: state.sessionLength - 1,
@@ -111,11 +159,29 @@ class App extends React.Component {
                 } else {
                     return;
                 }
-            case 'session-increment':
+            case 'session-increment,current:Session':
                 if (this.state.sessionLength < 60) {
                     this.setState(state => ({
                         sessionLength: state.sessionLength + 1,
                         timeLeft: state.timeLeft + 60,
+                    }));
+                    return;
+                } else {
+                    return;
+                }
+            case 'session-decrement,current:Break':
+                if (this.state.sessionLength > 1) {
+                    this.setState(state => ({
+                        sessionLength: state.sessionLength - 1,
+                    }));
+                    return;
+                } else {
+                    return;
+                }
+            case 'session-increment,current:Break':
+                if (this.state.sessionLength < 60) {
+                    this.setState(state => ({
+                        sessionLength: state.sessionLength + 1,
                     }));
                     return;
                 } else {
@@ -143,7 +209,7 @@ class App extends React.Component {
             audio.play();
             const newCurrentCounting = (this.state.currentCounting === 'Session') ? 'Break' : 'Session';
             const newTimeLeft = (this.state.currentCounting === 'Session') ? this.state.breakLength * 60 : this.state.sessionLength * 60;
-            
+
             document.getElementById('time-left').style.color = null;
             this.setState({
                 timeLeft: newTimeLeft,
@@ -154,9 +220,13 @@ class App extends React.Component {
         };
 
 
+
         this.setState({
             timeLeft: this.state.timeLeft - 1
         });
+
+        document.getElementsByTagName('title')[0].text = `(${this.clockify(this.state.timeLeft)}) Promodoro Clock`;
+
     }
 
     handleStartToggle() {
@@ -189,8 +259,8 @@ class App extends React.Component {
                 <DisplayPanel timeLeft={this.clockify(this.state.timeLeft)} handleReset={this.handleReset}
                     handleStartToggle={this.handleStartToggle} currentCounting={this.state.currentCounting} />
                 <div id='control-panels-group'>
-                    <ControlPanel value={'Break'} length={this.state.breakLength} handleInDecrement={this.handleInDecrement} />
-                    <ControlPanel value={'Session'} length={this.state.sessionLength} handleInDecrement={this.handleInDecrement} />
+                    <ControlPanel value={'Break'} length={this.state.breakLength} handleInDecrement={this.handleInDecrement} handleDefaultBtn={this.handleDefaultBtn} />
+                    <ControlPanel value={'Session'} length={this.state.sessionLength} handleInDecrement={this.handleInDecrement} handleDefaultBtn={this.handleDefaultBtn} />
                 </div>
 
                 <audio id="beep" preload="auto" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"></audio>

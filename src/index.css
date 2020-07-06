@@ -10,6 +10,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    touch-action: manipulation; /* disable double click zoom in */
 }
 
 h1 {
@@ -38,11 +39,11 @@ h1 {
     flex-direction: column;
     justify-content: space-around;
     border: solid 5px whitesmoke;
-    width: 35vw;
-    height: 35vw;
+    width: 32vw;
+    height: 32vw;
     border-radius: 50%;
     margin: 0 auto;
-    margin-bottom: 2em;
+    margin-bottom: 1em;
 }
 
 button {
@@ -58,6 +59,8 @@ button:hover {
 
 button:active {
     color: #cacaca;
+    text-shadow: none;
+    box-shadow: none;
     transform: translateY(4px);
 }
 
@@ -80,6 +83,11 @@ p {
 
 .btn-level {
     display: inline-block;
+    
+}
+
+button {
+    text-shadow: 2px 2px black;
 }
 
 #break-length, #session-length {
@@ -92,6 +100,29 @@ p {
     font-size: 2rem;
     margin-block-start: 0;
     margin-block-end: 0;
+}
+
+#default-break, #default-session {
+    width: 10rem;
+    background-color: whitesmoke;
+    color: rgb(53, 160, 155);
+    font-family: 'Lalezar', cursive;
+    border-radius: 10px;
+    font-size: 2rem;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding: 0 0;
+    box-shadow: 2px 2px black;
+    text-shadow: none;
+}
+
+#default-break:hover, #default-session:hover {
+    background-color: #cacaca;
+}
+
+#default-break:active, #default-session:active {
+    background-color: #cacaca;
+    box-shadow: none;
 }
 
 @media (max-width: 1200px) {
