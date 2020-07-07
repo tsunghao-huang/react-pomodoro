@@ -2,12 +2,18 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
+const mandarinLabel = {
+    Session: '工作',
+    Break: '休息'
+}
+
+
 class ControlPanel extends React.Component {
     render() {
         return (
             <div id={`${this.props.value.toLowerCase()}-panel`} className='control-panel'>
-                <button id={`default-${this.props.value.toLowerCase()}`} onClick={this.props.handleDefaultBtn}>{`${this.props.value}`}</button>
-                <h2 id={`${this.props.value.toLowerCase()}-label`}>{`Custom ${this.props.value}`}</h2>
+                <button id={`default-${this.props.value.toLowerCase()}`} onClick={this.props.handleDefaultBtn}>{(this.props.english) ? this.props.value : mandarinLabel[this.props.value]}</button>
+                <h2 id={`${this.props.value.toLowerCase()}-label`}>{(this.props.english) ? `Custom ${this.props.value}` : `自訂${mandarinLabel[this.props.value]}`}</h2>
                 <button id={`${this.props.value.toLowerCase()}-decrement`} onClick={this.props.handleInDecrement} className='btn-level'>
                     <i className="fa fa-arrow-down fa-2x" aria-hidden="true"></i>
                 </button>
@@ -27,7 +33,7 @@ class ControlPanel extends React.Component {
 function DisplayPanel(props) {
     return (
         <div id='display-panel'>
-            <h2 id='timer-label'>{props.currentCounting}</h2>
+            <h2 id='timer-label'>{(props.english) ? props.currentCounting : mandarinLabel[props.currentCounting]}</h2>
             <p id='time-left'>{props.timeLeft}</p>
 
             <div>
@@ -53,6 +59,7 @@ class App extends React.Component {
             timeLeft: 1500,
             counting: false,
             currentCounting: 'Session',
+            english: false
         };
         this.handleReset = this.handleReset.bind(this);
         this.clockify = this.clockify.bind(this);
@@ -60,6 +67,13 @@ class App extends React.Component {
         this.tick = this.tick.bind(this);
         this.handleInDecrement = this.handleInDecrement.bind(this);
         this.handleDefaultBtn = this.handleDefaultBtn.bind(this);
+        this.handleLanguage = this.handleLanguage.bind(this);
+    }
+
+    handleLanguage () {
+        this.setState({
+            english: !this.state.english
+        });
     }
 
     handleReset() {
@@ -255,12 +269,13 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <h1>Promodoro Clock</h1>
+                <h1>{(this.state.english) ? 'Promodoro Clock' : '蕃 茄 鐘'}</h1>
+                <button id='language-btn' onClick={this.handleLanguage}>{(this.state.english) ? '繁體中文' : 'English'}</button>
                 <DisplayPanel timeLeft={this.clockify(this.state.timeLeft)} handleReset={this.handleReset}
-                    handleStartToggle={this.handleStartToggle} currentCounting={this.state.currentCounting} />
+                    handleStartToggle={this.handleStartToggle} currentCounting={this.state.currentCounting} english={this.state.english} />
                 <div id='control-panels-group'>
-                    <ControlPanel value={'Break'} length={this.state.breakLength} handleInDecrement={this.handleInDecrement} handleDefaultBtn={this.handleDefaultBtn} />
-                    <ControlPanel value={'Session'} length={this.state.sessionLength} handleInDecrement={this.handleInDecrement} handleDefaultBtn={this.handleDefaultBtn} />
+                    <ControlPanel value={'Break'} length={this.state.breakLength} handleInDecrement={this.handleInDecrement} handleDefaultBtn={this.handleDefaultBtn} english={this.state.english} />
+                    <ControlPanel value={'Session'} length={this.state.sessionLength} handleInDecrement={this.handleInDecrement} handleDefaultBtn={this.handleDefaultBtn} english={this.state.english} />
                 </div>
 
                 <audio id="beep" preload="auto" src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"></audio>
