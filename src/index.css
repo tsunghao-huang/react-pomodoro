@@ -1,7 +1,3 @@
-html {
-    height: 100%;
-}
-
 body {
     font-family: 'Lalezar', cursive;
     background-color: rgb(53, 160, 155);
@@ -13,15 +9,36 @@ body {
     touch-action: manipulation; /* disable double click zoom in */
 }
 
+#language-btn {
+    width: 7rem;
+    background-color: whitesmoke;
+    color: rgb(53, 160, 155);
+    font-family: 'Lalezar', cursive;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    position: absolute;
+    right: 2rem;
+    top: 2rem;
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding: 0 0;
+    box-shadow: 2px 2px black;
+    text-shadow: none;
+}
+
+#language-btn:hover {
+    background-color: #cacaca;
+}
+
 h1 {
-    font-size: 4rem;
-    margin-block-start: 0.2em;
-    margin-block-end: 0.2em;
+    font-size: 5vmax;
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
 
 #root {
     width: 100%;
-    height: 80%;
+    /* height: 80%; */
     text-align: center;
 }
 
@@ -30,17 +47,13 @@ h1 {
     justify-content: space-around;
 }
 
-/* .control-panel {
-    margin: 10px;
-} */
-
 #display-panel {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     border: solid 5px whitesmoke;
-    width: 32vw;
-    height: 32vw;
+    width: 30vmax;
+    height: 30vmax;
     border-radius: 50%;
     margin: 0 auto;
     margin-bottom: 1em;
@@ -51,6 +64,7 @@ button {
     background-color: transparent;
     border: none;
     outline: none;
+    text-shadow: 2px 2px black;
 }
 
 button:hover {
@@ -64,36 +78,32 @@ button:active {
     transform: translateY(4px);
 }
 
-#timer-label {
-    font-size: 3.6rem;
-    margin: 0 0;
-}
-
-p {
-    font-family: 'Orbitron', sans-serif;
-    font-size: 2rem;
-    font-weight: 900;
-}
-
-#time-left {
-    font-size: 7rem;
-    margin-block-start: 0;
-    margin-block-end: 0.5em;
-}
-
 .btn-level {
     display: inline-block;
     
 }
 
-button {
-    text-shadow: 2px 2px black;
+#timer-label {
+    font-size: 4vmax;
+    margin: 0 0;
+}
+
+p {
+    font-family: 'Orbitron', sans-serif;
+}
+
+#time-left {
+    font-size: 7vmax;
+    margin-block-start: 0;
+    margin-block-end: 0.26em;
 }
 
 #break-length, #session-length {
     width: 4rem;
     margin-block-start: 0;
     margin-block-end: 0;
+    font-size: 2rem;
+    font-weight: 900;
 }
 
 #break-label, #session-label {
@@ -125,37 +135,35 @@ button {
     box-shadow: none;
 }
 
-#language-btn {
-    width: 7rem;
-    background-color: whitesmoke;
-    color: rgb(53, 160, 155);
-    font-family: 'Lalezar', cursive;
-    border-radius: 10px;
-    font-size: 1.4rem;
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-    margin-block-start: 0;
-    margin-block-end: 0;
-    padding: 0 0;
-    box-shadow: 2px 2px black;
-    text-shadow: none;
-}
-
-
-@media (max-width: 1200px) {
-    #time-left {
-        font-size: 5rem;
-    }
-}
-
 @media (max-width: 900px) {
     html {
         font-size: 90%;
     }
+}
+
+
+@media (max-width: 900px) {
+    html {
+        font-size: 80%;
+    }
+}
+
+@media (max-width: 700px) {
+    html {
+        font-size: 70%;
+    }
     #display-panel {
-        width: 50vmax;
-        height: 50vmax;
+        width: 60vmin;
+        height: 60vmin;
+    }
+    h1 {
+        font-size: 10vmin;
+    }
+    #timer-label {
+        font-size: 8vmin;
+    }
+    #time-left {
+        font-size: 14vmin;
     }
 }
 
@@ -164,8 +172,17 @@ button {
         font-size: 80%;
     }
     #display-panel {
-        width: 80vmin;
-        height: 80vmin;
+        width: 75vmin;
+        height: 75vmin;
+    }
+    h1 {
+        font-size: 10vmin;
+    }
+    #timer-label {
+        font-size: 9vmin;
+    }
+    #time-left {
+        font-size: 16vmin;
     }
 }
 
@@ -173,18 +190,10 @@ button {
     html {
         font-size: 70%;
     }
-    #display-panel {
-        width: 80vmin;
-        height: 80vmin;
-    }
 }
 
 @media (max-width: 350px) {
     html {
         font-size: 60%;
-    }
-    #display-panel {
-        width: 80vmin;
-        height: 80vmin;
     }
 }

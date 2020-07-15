@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 const mandarinLabel = {
-    Session: '工作',
-    Break: '休息'
+    Session: '工 作',
+    Break: '休 息'
 }
 
 
@@ -13,7 +13,7 @@ class ControlPanel extends React.Component {
         return (
             <div id={`${this.props.value.toLowerCase()}-panel`} className='control-panel'>
                 <button id={`default-${this.props.value.toLowerCase()}`} onClick={this.props.handleDefaultBtn}>{(this.props.english) ? this.props.value : mandarinLabel[this.props.value]}</button>
-                <h2 id={`${this.props.value.toLowerCase()}-label`}>{(this.props.english) ? `Custom ${this.props.value}` : `自訂${mandarinLabel[this.props.value]}`}</h2>
+                <h2 id={`${this.props.value.toLowerCase()}-label`}>{(this.props.english) ? `Custom ${this.props.value}` : `自 訂 ${mandarinLabel[this.props.value]}`}</h2>
                 <button id={`${this.props.value.toLowerCase()}-decrement`} onClick={this.props.handleInDecrement} className='btn-level'>
                     <i className="fa fa-arrow-down fa-2x" aria-hidden="true"></i>
                 </button>
@@ -59,7 +59,7 @@ class App extends React.Component {
             timeLeft: 1500,
             counting: false,
             currentCounting: 'Session',
-            english: false
+            english: true
         };
         this.handleReset = this.handleReset.bind(this);
         this.clockify = this.clockify.bind(this);
@@ -105,7 +105,6 @@ class App extends React.Component {
         // console.log(e.target.id);
         if (e.target.id.includes('session')) {
             this.setState({
-                breakLength: 5,
                 sessionLength: 25,
                 timeLeft: 1500,
                 counting: false,
