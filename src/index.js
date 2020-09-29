@@ -211,7 +211,7 @@ class App extends React.Component {
 
         // change color when time left <= 60
         if (this.state.timeLeft <= 60) {
-            document.getElementById('time-left').style.color = "rgb(175, 81, 78)";
+            document.getElementById('time-left').style.color = "#F8BFCE";
         } else {
             document.getElementById('time-left').style.color = null;
         }

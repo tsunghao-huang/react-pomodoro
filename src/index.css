@@ -1,7 +1,7 @@
 body {
     font-family: 'Lalezar', cursive;
-    background-color: rgb(53, 160, 155);
-    color: ghostwhite;
+    background-color: #155E5C;
+    color: white;
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -11,8 +11,8 @@ body {
 
 #language-btn {
     width: 7rem;
-    background-color: whitesmoke;
-    color: rgb(53, 160, 155);
+    background-color: white;
+    color: #155E5C;
     font-family: 'Lalezar', cursive;
     border-radius: 10px;
     font-size: 1.4rem;
@@ -51,7 +51,7 @@ h1 {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    border: solid 5px whitesmoke;
+    border: solid 5px white;
     width: 28vmax;
     height: 28vmax;
     border-radius: 50%;
@@ -60,7 +60,7 @@ h1 {
 }
 
 button {
-    color: ghostwhite;
+    color: #ffffff;
     background-color: transparent;
     border: none;
     outline: none;
@@ -114,8 +114,8 @@ p {
 
 #default-break, #default-session {
     width: 10rem;
-    background-color: whitesmoke;
-    color: rgb(53, 160, 155);
+    background-color: white;
+    color: #155E5C;
     font-family: 'Lalezar', cursive;
     border-radius: 10px;
     font-size: 2rem;
