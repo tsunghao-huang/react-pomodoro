@@ -1,199 +1,209 @@
 body {
-    font-family: 'Lalezar', cursive;
-    background-color: #155E5C;
-    color: white;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    touch-action: manipulation; /* disable double click zoom in */
+  font-family: "Lalezar", cursive;
+  background-color: #155e5c;
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  touch-action: manipulation; /* disable double click zoom in */
 }
 
 #language-btn {
-    width: 7rem;
-    background-color: white;
-    color: #155E5C;
-    font-family: 'Lalezar', cursive;
-    border-radius: 10px;
-    font-size: 1.4rem;
-    position: absolute;
-    right: 2rem;
-    top: 2rem;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 0 0;
-    box-shadow: 2px 2px black;
-    text-shadow: none;
+  width: 7rem;
+  background-color: white;
+  color: #155e5c;
+  font-family: "Lalezar", cursive;
+  border-radius: 10px;
+  font-size: 1.4rem;
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0 0;
+  box-shadow: 2px 2px black;
+  text-shadow: none;
+}
+
+*:focus {
+  outline: 3px dashed #ff5566;
+  outline-offset: 0;
 }
 
 #language-btn:hover {
-    background-color: #cacaca;
+  background-color: #cacaca;
 }
 
 h1 {
-    font-size: 5vmax;
-    margin-top: 0;
-    margin-bottom: 0;
+  font-size: 5vmax;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 #root {
-    width: 100%;
-    /* height: 80%; */
-    text-align: center;
+  width: 100%;
+  /* height: 80%; */
+  text-align: center;
 }
 
 #control-panels-group {
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
 
 #display-panel {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    border: solid 5px white;
-    width: 28vmax;
-    height: 28vmax;
-    border-radius: 50%;
-    margin: 0 auto;
-    margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: solid 5px white;
+  width: 28vmax;
+  height: 28vmax;
+  border-radius: 50%;
+  margin: 0 auto;
+  margin-bottom: 1em;
 }
 
 button {
-    color: #ffffff;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    text-shadow: 2px 2px black;
+  color: #ffffff;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  text-shadow: 2px 2px black;
 }
 
 button:hover {
-    color: #cacaca;
+  color: #cacaca;
 }
 
 button:active {
-    color: #cacaca;
-    text-shadow: none;
-    box-shadow: none;
-    transform: translateY(4px);
+  color: #cacaca;
+  text-shadow: none;
+  box-shadow: none;
+  transform: translateY(4px);
 }
 
 .btn-level {
-    display: inline-block;
-    
+  display: inline-block;
 }
 
 #timer-label {
-    font-size: 4vmax;
-    margin: 0 0;
+  font-family: "Lalezar", cursive;
+  font-size: 4vmax;
+  margin: 0 0;
 }
 
 p {
-    font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
 }
 
 #time-left {
-    font-size: 7vmax;
-    margin-top: 0;
-    margin-bottom: 0.26em;
+  font-size: 7vmax;
+  margin-top: 0;
+  margin-bottom: 0.26em;
 }
 
-#break-length, #session-length {
-    width: 4rem;
-    margin-top: 0;
-    margin-bottom: 0;
-    font-size: 2rem;
-    font-weight: 900;
+#break-length,
+#session-length {
+  width: 4rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 2rem;
+  font-weight: 900;
 }
 
-#break-label, #session-label {
-    font-size: 2rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0;
+#break-label,
+#session-label {
+  font-family: "Lalezar", cursive;
+  font-size: 2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
 }
 
-#default-break, #default-session {
-    width: 10rem;
-    background-color: white;
-    color: #155E5C;
-    font-family: 'Lalezar', cursive;
-    border-radius: 10px;
-    font-size: 2rem;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 0 0;
-    box-shadow: 2px 2px black;
-    text-shadow: none;
+#default-break,
+#default-session {
+  width: 10rem;
+  background-color: white;
+  color: #155e5c;
+  font-family: "Lalezar", cursive;
+  border-radius: 10px;
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 0 0;
+  box-shadow: 2px 2px black;
+  text-shadow: none;
 }
 
-#default-break:hover, #default-session:hover {
-    background-color: #cacaca;
+#default-break:hover,
+#default-session:hover {
+  background-color: #cacaca;
 }
 
-#default-break:active, #default-session:active {
-    background-color: #cacaca;
-    box-shadow: none;
+#default-break:active,
+#default-session:active {
+  background-color: #cacaca;
+  box-shadow: none;
 }
 
 @media (max-width: 900px) {
-    html {
-        font-size: 90%;
-    }
+  html {
+    font-size: 90%;
+  }
 }
 
-
 @media (max-width: 900px) {
-    html {
-        font-size: 80%;
-    }
+  html {
+    font-size: 80%;
+  }
 }
 
 @media (max-width: 800px) {
-    html {
-        font-size: 70%;
-    }
-    #display-panel {
-        width: 60vmin;
-        height: 60vmin;
-    }
-    h1 {
-        font-size: 10vmin;
-    }
-    #timer-label {
-        font-size: 8vmin;
-    }
-    #time-left {
-        font-size: 14vmin;
-    }
+  html {
+    font-size: 70%;
+  }
+  #display-panel {
+    width: 60vmin;
+    height: 60vmin;
+  }
+  h1 {
+    font-size: 10vmin;
+  }
+  #timer-label {
+    font-size: 8vmin;
+  }
+  #time-left {
+    font-size: 14vmin;
+  }
 }
 
 @media (max-width: 450px) {
-    html {
-        font-size: 80%;
-    }
-    #display-panel {
-        width: 75vmin;
-        height: 75vmin;
-    }
-    h1 {
-        font-size: 10vmin;
-    }
-    #timer-label {
-        font-size: 9vmin;
-    }
-    #time-left {
-        font-size: 16vmin;
-    }
+  html {
+    font-size: 80%;
+  }
+  #display-panel {
+    width: 75vmin;
+    height: 75vmin;
+  }
+  h1 {
+    font-size: 10vmin;
+  }
+  #timer-label {
+    font-size: 9vmin;
+  }
+  #time-left {
+    font-size: 16vmin;
+  }
 }
 
 @media (max-width: 400px) {
-    html {
-        font-size: 70%;
-    }
+  html {
+    font-size: 70%;
+  }
 }
 
 @media (max-width: 350px) {
-    html {
-        font-size: 60%;
-    }
+  html {
+    font-size: 60%;
+  }
 }

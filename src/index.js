@@ -12,17 +12,37 @@ class ControlPanel extends React.Component {
     render() {
         return (
             <div id={`${this.props.value.toLowerCase()}-panel`} className='control-panel'>
-                <button id={`default-${this.props.value.toLowerCase()}`} onClick={this.props.handleDefaultBtn}>{(this.props.english) ? this.props.value : mandarinLabel[this.props.value]}</button>
-                <h2 id={`${this.props.value.toLowerCase()}-label`}>{(this.props.english) ? `Custom ${this.props.value}` : `自 訂 ${mandarinLabel[this.props.value]}`}</h2>
-                <button id={`${this.props.value.toLowerCase()}-decrement`} onClick={this.props.handleInDecrement} className='btn-level'>
-                    <i className="fa fa-arrow-down fa-2x" aria-hidden="true"></i>
+                <button
+                    aria-label={`set ${this.props.value.toLowerCase()} to default duration.`}
+                    id={`default-${this.props.value.toLowerCase()}`}
+                    onClick={this.props.handleDefaultBtn}
+                >
+                    {(this.props.english) ? this.props.value : mandarinLabel[this.props.value]}
                 </button>
+                {/* <p id={`${this.props.value.toLowerCase()}-label`}>{(this.props.english) ? `Custom ${this.props.value}` : `自 訂 ${mandarinLabel[this.props.value]}`}</p> */}
 
-                <p id={`${this.props.value.toLowerCase()}-length`} className='btn-level'>{this.props.length}</p>
+                <div>
+                    <button
+                        aria-label={`decrement ${this.props.value.toLowerCase()} duration by 1 minute.`}
+                        id={`${this.props.value.toLowerCase()}-decrement`}
+                        onClick={this.props.handleInDecrement}
+                        className='btn-level'
+                    >
+                        <i className="fa fa-arrow-down fa-2x" aria-hidden="true"></i>
+                    </button>
 
-                <button id={`${this.props.value.toLowerCase()}-increment`} onClick={this.props.handleInDecrement} className='btn-level'>
-                    <i className="fa fa-arrow-up fa-2x" aria-hidden="true"></i>
-                </button>
+                    <p aria-label={`Custom ${this.props.value}`} aria-live='assertive' id={`${this.props.value.toLowerCase()}-length`} className='btn-level'>{this.props.length}</p>
+
+                    <button
+                        aria-label={`increment ${this.props.value.toLowerCase()} duration by 1 minute.`}
+                        id={`${this.props.value.toLowerCase()}-increment`}
+                        onClick={this.props.handleInDecrement}
+                        className='btn-level'
+                    >
+                        <i className="fa fa-arrow-up fa-2x" aria-hidden="true"></i>
+                    </button>
+                </div>
+
 
             </div>
 
@@ -32,16 +52,16 @@ class ControlPanel extends React.Component {
 
 function DisplayPanel(props) {
     return (
-        <div id='display-panel'>
-            <h2 id='timer-label'>{(props.english) ? props.currentCounting : mandarinLabel[props.currentCounting]}</h2>
-            <p id='time-left'>{props.timeLeft}</p>
+        <div id='display-panel' aria-label="display panel">
+            <p id='timer-label' aria-label={`Currently counting for ${props.currentCounting}`}>{(props.english) ? props.currentCounting : mandarinLabel[props.currentCounting]}</p>
+            <p id='time-left' role='timer' aria-label={`Duration for ${props.currentCounting}`}>{props.timeLeft}</p>
 
             <div>
-                <button id="start_stop" onClick={props.handleStartToggle} className='btn-level'>
+                <button aria-label={`start ${props.currentCounting}`} id="start_stop" onClick={props.handleStartToggle} className='btn-level'>
                     <i className="fa fa-play fa-3x"></i>
                     <i className="fa fa-pause fa-3x"></i>
                 </button>
-                <button id="reset" onClick={props.handleReset} className='btn-level'>
+                <button aria-label={`reset to session, 25 minutes.`} id="reset" onClick={props.handleReset} className='btn-level'>
                     <i className="fa fa-refresh fa-3x"></i>
                 </button>
             </div>
@@ -70,10 +90,15 @@ class App extends React.Component {
         this.handleLanguage = this.handleLanguage.bind(this);
     }
 
-    handleLanguage () {
+    handleLanguage() {
         this.setState({
             english: !this.state.english
         });
+        if (this.state.english) {
+            document.documentElement.setAttribute('lang', 'zh-TW');
+        } else {
+            document.documentElement.setAttribute('lang', 'en');
+        }
     }
 
     handleReset() {
@@ -269,12 +294,12 @@ class App extends React.Component {
         return (
             <div>
                 <h1>{(this.state.english) ? 'Promodoro Clock' : '蕃 茄 鐘'}</h1>
-                <button id='language-btn' onClick={this.handleLanguage}>{(this.state.english) ? '繁體中文' : 'English'}</button>
+                <button aria-label={`switch language to ${this.state.english ? 'Mandarin' : 'English'}`} id='language-btn' onClick={this.handleLanguage}>{(this.state.english) ? '繁體中文' : 'English'}</button>
                 <DisplayPanel timeLeft={this.clockify(this.state.timeLeft)} handleReset={this.handleReset}
                     handleStartToggle={this.handleStartToggle} currentCounting={this.state.currentCounting} english={this.state.english} />
                 <div id='control-panels-group'>
-                    <ControlPanel value={'Break'} length={this.state.breakLength} handleInDecrement={this.handleInDecrement} handleDefaultBtn={this.handleDefaultBtn} english={this.state.english} />
-                    <ControlPanel value={'Session'} length={this.state.sessionLength} handleInDecrement={this.handleInDecrement} handleDefaultBtn={this.handleDefaultBtn} english={this.state.english} />
+                    <ControlPanel value={'Break'} currentCounting={this.state.currentCounting} length={this.state.breakLength} handleInDecrement={this.handleInDecrement} handleDefaultBtn={this.handleDefaultBtn} english={this.state.english} />
+                    <ControlPanel value={'Session'} currentCounting={this.state.currentCounting} length={this.state.sessionLength} handleInDecrement={this.handleInDecrement} handleDefaultBtn={this.handleDefaultBtn} english={this.state.english} />
                 </div>
 
                 <audio id="beep" preload="auto" src="https://raw.githubusercontent.com/tsunghao-huang/react-pomodoro/gh-pages/homeland.mp3"></audio>
