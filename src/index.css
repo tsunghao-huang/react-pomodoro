@@ -146,19 +146,13 @@ p {
   box-shadow: none;
 }
 
-@media (max-width: 900px) {
+/* @media (max-width: 900px) {
   html {
     font-size: 90%;
   }
-}
+} */
 
-@media (max-width: 900px) {
-  html {
-    font-size: 80%;
-  }
-}
-
-@media (max-width: 800px) {
+@media (max-width: 1200px) {
   html {
     font-size: 70%;
   }
