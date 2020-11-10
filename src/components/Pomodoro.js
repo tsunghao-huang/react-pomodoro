@@ -1,8 +1,8 @@
 import React from 'react';
-import ControlPanel from './Promodoro-sub/ControlPanel';
-import DisplayPanel from './Promodoro-sub/DisplayPanel';
+import ControlPanel from './Pomodoro-sub/ControlPanel';
+import DisplayPanel from './Pomodoro-sub/DisplayPanel';
 
-class Promodoro extends React.Component {
+class Pomodoro extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -53,7 +53,7 @@ class Promodoro extends React.Component {
         document.getElementById('time-left').style.color = null;
 
         // and the title
-        document.getElementsByTagName('title')[0].text = 'Promodoro Clock';
+        document.getElementsByTagName('title')[0].text = 'Pomodoro Clock';
     }
 
     handleDefaultBtn(e) {
@@ -195,7 +195,7 @@ class Promodoro extends React.Component {
             timeLeft: this.state.timeLeft - 1
         });
 
-        document.getElementsByTagName('title')[0].text = `(${this.clockify(this.state.timeLeft)}) Promodoro Clock`;
+        document.getElementsByTagName('title')[0].text = `(${this.clockify(this.state.timeLeft)}) Pomodoro Clock`;
 
     }
 
@@ -224,7 +224,7 @@ class Promodoro extends React.Component {
 
     render() {
         const mandarinLabel = {
-            'Promodoro Clock': '蕃 茄 鐘',
+            'Pomodoro Clock': '蕃 茄 鐘',
             Session: '工 作',
             Break: '休 息'
         }
@@ -241,8 +241,8 @@ class Promodoro extends React.Component {
                 mandarinLabel={mandarinLabel} />
         ));
         return (
-            <div id='promodoro-panel'>
-                <h1>{(this.state.english) ? 'Promodoro Clock' : mandarinLabel['Promodoro Clock']}</h1>
+            <div id='pomodoro-panel'>
+                <h1>{(this.state.english) ? 'Pomodoro Clock' : mandarinLabel['Pomodoro Clock']}</h1>
                 <button aria-label={`switch language to ${this.state.english ? 'Mandarin' : 'English'}`} id='language-btn' onClick={this.handleLanguage}>{(this.state.english) ? '繁體中文' : 'English'}</button>
                 <DisplayPanel
                     timeLeft={this.clockify(this.state.timeLeft)}
@@ -261,4 +261,4 @@ class Promodoro extends React.Component {
     }
 }
 
-export default Promodoro;
+export default Pomodoro;
