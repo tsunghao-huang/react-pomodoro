@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-import Promodoro from './components/Promodoro';
+import Pomodoro from './components/Pomodoro';
 import TodoApp from './components/TodoApp';
 
 function App() {
     return (
         <div>
-            <Promodoro />
+            <Pomodoro />
             <TodoApp />
         </div>
 
