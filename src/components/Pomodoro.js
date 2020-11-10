@@ -234,7 +234,7 @@ class Pomodoro extends React.Component {
                 value={v}
                 key={`${v}-panel`}
                 currentCounting={this.state.currentCounting}
-                length={this.state.breakLength}
+                length={this.state[`${v.toLowerCase()}Length`]}
                 handleInDecrement={this.handleInDecrement}
                 handleDefaultBtn={this.handleDefaultBtn}
                 english={this.state.english}
