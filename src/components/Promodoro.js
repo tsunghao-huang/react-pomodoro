@@ -234,7 +234,7 @@ class Promodoro extends React.Component {
                 value={v}
                 key={`${v}-panel`}
                 currentCounting={this.state.currentCounting}
-                length={this.state.breakLength}
+                length={(v === 'Break') ? this.state.breakLength : this.state.sessionLength}
                 handleInDecrement={this.handleInDecrement}
                 handleDefaultBtn={this.handleDefaultBtn}
                 english={this.state.english}

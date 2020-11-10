@@ -1,0 +1,35 @@
+.todoapp {
+  max-width: 68rem;
+  margin: 3rem auto;
+  background: #e76c6c;
+  /* margin: 2rem 0 4rem; */
+  padding: 1rem;
+  position: relative;
+  border-radius: 10px;
+  /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 2.5rem 5rem 0 rgba(0, 0, 0, 0.1); */
+}
+
+.input__lg {
+  background-color: transparent;
+  padding: 2rem;
+  border: 2px solid white;
+  display: inline-block;
+  width: 80%;
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
