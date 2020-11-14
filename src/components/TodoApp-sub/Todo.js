@@ -7,7 +7,7 @@ export default function Todo(props) {
     const editButtonRef = useRef(null);
 
     const [isEditing, setEditing] = useState(false);
-    const [newName, setNewName] = useState('');
+    const [newName, setNewName] = useState(props.name);
     const wasEditing = usePrevious(isEditing);
 
     function handleChange(e) {
@@ -16,8 +16,9 @@ export default function Todo(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
+        if (e.target.value === "") return;
         props.editTask(props.id, newName);
-        setNewName("");
+        // setNewName("");
         setEditing(false);
     }
 
@@ -87,7 +88,9 @@ export default function Todo(props) {
 
     useEffect(() => {
         if (!wasEditing && isEditing) {
+            editFieldRef.current.select();
             editFieldRef.current.focus();
+            // setNewName(props.name);
         }
         if (wasEditing && !isEditing) {
             editButtonRef.current.focus();
