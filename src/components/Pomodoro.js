@@ -2,6 +2,12 @@ import React from 'react';
 import ControlPanel from './Pomodoro-sub/ControlPanel';
 import DisplayPanel from './Pomodoro-sub/DisplayPanel';
 
+const mandarinLabel = {
+    'Pomodoro Clock': '蕃 茄 鐘',
+    Session: '工 作',
+    Break: '休 息'
+}
+
 class Pomodoro extends React.Component {
     constructor(props) {
         super(props);
@@ -223,11 +229,6 @@ class Pomodoro extends React.Component {
     }
 
     render() {
-        const mandarinLabel = {
-            'Pomodoro Clock': '蕃 茄 鐘',
-            Session: '工 作',
-            Break: '休 息'
-        }
 
         const controlPanelList = ['Break', 'Session'].map((v) => (
             <ControlPanel
