@@ -252,7 +252,7 @@ class Pomodoro extends React.Component {
                     currentCounting={this.state.currentCounting}
                     english={this.state.english}
                     mandarinLabel={mandarinLabel} />
-                <div id='control-panels-group'>
+                <div id='control-panels-group' className='btn-group'>
                     {controlPanelList}
                 </div>
                 <audio id="beep" preload="auto" src="https://raw.githubusercontent.com/tsunghao-huang/react-pomodoro/gh-pages/homeland.mp3"></audio>

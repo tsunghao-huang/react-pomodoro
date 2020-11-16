@@ -3,10 +3,34 @@ body {
   background-color: #155e5c;
   color: white;
   min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
   touch-action: manipulation; /* disable double click zoom in */
+}
+
+#App {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  /* align-items: center; */
+}
+
+#pomodoro-panel {
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  min-width: 40%;
+}
+
+#todoapp {
+  margin-top: 4rem;
+  min-width: 40%;
+}
+
+#pomodoro-panel,
+#todoapp {
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 
 h1 {
@@ -68,11 +92,11 @@ button:hover {
 
 #language-btn {
   width: 7rem;
-  color: #155e5c;
+  /* color: #155e5c; */
   font-size: 1.4rem;
   position: absolute;
-  right: 2rem;
-  top: 2rem;
+  right: 1rem;
+  top: 1rem;
   margin-top: 0;
   margin-bottom: 0;
   padding: 0 0;
@@ -92,11 +116,11 @@ button:hover {
   flex-direction: column;
   justify-content: space-around;
   border: solid 5px white;
-  width: 28vmax;
-  height: 28vmax;
+  min-width: 30vmax;
+  min-height: 30vmax;
   border-radius: 50%;
-  margin: 0 auto;
-  margin-bottom: 1em;
+  margin: 2rem auto;
+  margin-top: 1em;
   text-align: center;
 }
 
@@ -114,32 +138,89 @@ button:hover {
 
 #break-length,
 #session-length {
-  width: 4rem;
+  width: 3rem;
   margin-top: 0;
   margin-bottom: 0;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 900;
   pointer-events: none;
   text-shadow: none;
 }
 
-#break-label,
+/* #break-label,
 #session-label {
   font-family: "Lalezar", cursive;
-  font-size: 2rem;
+  font-size: 1.5rem;
   margin-top: 0.5rem;
   margin-bottom: 0;
-}
+} */
 
 #default-break,
 #default-session {
-  width: 10rem;
-  font-size: 2rem;
-  color: #155e5c;
+  width: 9rem;
+  font-size: 1.5rem;
+  /* color: #155e5c; */
   padding: 0 0;
 }
 
-@media (max-width: 1200px) {
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-group > * {
+  flex: 1 1 49%;
+  /* margin: 0 1rem; */
+  /* max-width: 15rem; */
+}
+
+.btn-group > * + * {
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 913px) {
+  #display-panel {
+    width: 38vmax;
+    height: 38vmax;
+  }
+  #time-left {
+    font-size: 10vmax;
+  }
+}
+
+@media (max-width: 500px) {
+  #display-panel {
+    width: 70vmin;
+    height: 70vmin;
+  }
+
+  #pomodoro-panel {
+    margin-top: 0;
+    height: 100vh;
+    justify-content: center;
+  }
+
+  #todoapp {
+    min-height: 80vh;
+    margin-top: 0;
+  }
+
+  #time-left {
+    font-size: 15vmin;
+  }
+}
+
+@media (max-width: 466px) {
+  html {
+    font-size: 80%;
+  }
+  /* #display-panel {
+    width: 34vmax;
+    height: 34vmax;
+  } */
+}
+
+/* @media (max-width: 1200px) {
   html {
     font-size: 70%;
   }
@@ -187,4 +268,4 @@ button:hover {
   html {
     font-size: 60%;
   }
-}
+} */

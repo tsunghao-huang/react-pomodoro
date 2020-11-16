@@ -13,7 +13,7 @@ const DATA = [
 
 function App() {
     return (
-        <div>
+        <div id="App">
             <Pomodoro />
             <TodoApp tasks={DATA} />
         </div>

@@ -89,7 +89,7 @@ export default function TodoApp(props) {
     }, [tasks.length, prevTaskLength]);
 
     return (
-        <div className="todoapp stack-large">
+        <div id="todoapp" className="stack-large">
             <h1>Todos</h1>
             <Form addTask={addTask} />
             <div className="filters btn-group stack-exception">
