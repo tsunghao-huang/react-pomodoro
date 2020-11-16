@@ -15,12 +15,23 @@ const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 export default function TodoApp(props) {
 
-    const [tasks, setTasks] = useState(props.tasks);
+    const localStorageKey = 'localTodo';
+    if (localStorage.getItem(localStorageKey) === null) {
+        localStorage.setItem(localStorageKey, JSON.stringify(props.tasks));
+    }
+    const localTodo = JSON.parse(localStorage.getItem(localStorageKey));
+    const [tasks, setTasks] = useState(localTodo);
     const [filter, setFilter] = useState('All');
+
+    function updateLocalStorage(updatedTodos) {
+        // localStorage.removeItem(localStorageKey);
+        localStorage.setItem(localStorageKey, JSON.stringify(updatedTodos));
+    }
 
     function addTask(name) {
         const newTask = { id: "todo-" + nanoid(), name: name, completed: false };
         setTasks([...tasks, newTask]);
+        updateLocalStorage([...tasks, newTask]);
     }
 
     function toggleTaskCompleted(id) {
@@ -34,11 +45,13 @@ export default function TodoApp(props) {
             return task;
         });
         setTasks(updatedTasks);
+        updateLocalStorage(updatedTasks);
     }
 
     function deleteTask(id) {
         const remainingTasks = tasks.filter(task => id !== task.id);
         setTasks(remainingTasks);
+        updateLocalStorage(remainingTasks);
     }
 
     function editTask(id, newName) {
@@ -51,6 +64,7 @@ export default function TodoApp(props) {
             return task;
         });
         setTasks(editedTaskList);
+        updateLocalStorage(editedTaskList);
     }
 
     const taskList = tasks
