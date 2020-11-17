@@ -15,7 +15,6 @@ body {
 }
 
 #pomodoro-panel {
-  margin-top: 4rem;
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
@@ -23,12 +22,12 @@ body {
 }
 
 #todoapp {
-  margin-top: 4rem;
   min-width: 40%;
 }
 
 #pomodoro-panel,
 #todoapp {
+  margin-top: 2rem;
   padding-left: 3rem;
   padding-right: 3rem;
 }
@@ -188,16 +187,18 @@ button:hover {
   }
 }
 
-@media (max-width: 500px) {
-  #display-panel {
-    width: 70vmin;
-    height: 70vmin;
-  }
-
+@media (max-width: 800px) {
   #pomodoro-panel {
     margin-top: 0;
     height: 100vh;
     justify-content: center;
+  }
+}
+
+@media (max-width: 500px) {
+  #display-panel {
+    width: 70vmin;
+    height: 70vmin;
   }
 
   #todoapp {
@@ -208,16 +209,18 @@ button:hover {
   #time-left {
     font-size: 15vmin;
   }
+  h1 {
+    font-size: 10vmin;
+  }
+  #timer-label {
+    font-size: 9vmin;
+  }
 }
 
 @media (max-width: 466px) {
   html {
     font-size: 80%;
   }
-  /* #display-panel {
-    width: 34vmax;
-    height: 34vmax;
-  } */
 }
 
 /* @media (max-width: 1200px) {
