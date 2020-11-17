@@ -1,27 +1,48 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ControlPanel from './Pomodoro-sub/ControlPanel';
 import DisplayPanel from './Pomodoro-sub/DisplayPanel';
 
-function Pomodoro(props) {
+class Pomodoro extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            breakLength: 5,
+            sessionLength: 25,
+            timeLeft: 1500,
+            counting: false,
+            currentCounting: 'Session',
+            english: true
+        };
+        this.handleReset = this.handleReset.bind(this);
+        this.clockify = this.clockify.bind(this);
+        this.handleStartToggle = this.handleStartToggle.bind(this);
+        this.tick = this.tick.bind(this);
+        this.handleInDecrement = this.handleInDecrement.bind(this);
+        this.handleDefaultBtn = this.handleDefaultBtn.bind(this);
+        this.handleLanguage = this.handleLanguage.bind(this);
+    }
 
-    const [breakLength, setBreakLength] = useState(5);
-    const [sessionLength, setSessionLength] = useState(25);
-    const [timeLeft, setTimeLeft] = useState(1500);
-    const [isCounting, setIsCounting] = useState(false);
-    const [currentCounting, setCurrentCounting] = useState('Session');
+    handleLanguage() {
+        this.setState({
+            english: !this.state.english
+        });
+        if (this.state.english) {
+            document.documentElement.setAttribute('lang', 'zh-TW');
+        } else {
+            document.documentElement.setAttribute('lang', 'en');
+        }
+    }
 
-    let intervalID;
-
-    function handleReset() {
-
-        setBreakLength(5);
-        setSessionLength(25);
-        setTimeLeft(1500);
-        setIsCounting(false);
-        setCurrentCounting('Session');
-
+    handleReset() {
+        this.setState({
+            breakLength: 5,
+            sessionLength: 25,
+            timeLeft: 1500,
+            counting: false,
+            currentCounting: 'Session',
+        });
         // reset should stop the timer as well
-        clearInterval(intervalID);
+        clearInterval(this.intervalID);
 
         // and the audio
         const audio = document.getElementById('beep');
@@ -35,83 +56,103 @@ function Pomodoro(props) {
         document.getElementsByTagName('title')[0].text = 'Pomodoro Clock';
     }
 
-    function handleDefaultBtn(e) {
+    handleDefaultBtn(e) {
         // ignore click, while the clock is counting
-        if (isCounting) return;
+        if (this.state.counting) return;
         // console.log(e.target.id);
         if (e.target.id.includes('session')) {
-            setSessionLength(25);
-            setTimeLeft(1500);
-            setIsCounting(false);
-            setCurrentCounting('Session');
+            this.setState({
+                sessionLength: 25,
+                timeLeft: 1500,
+                counting: false,
+                currentCounting: 'Session',
+            });
         } else {
-            setBreakLength(5);
-            setTimeLeft(1500);
-            setIsCounting(false);
-            setCurrentCounting('Session');
+            this.setState({
+                breakLength: 5,
+                timeLeft: 300,
+                counting: false,
+                currentCounting: 'Break',
+            });
         }
     }
 
-    function handleInDecrement(e) {
+    handleInDecrement(e) {
         // in case the clock is still running, disable handleInDecrement()
-        if (isCounting) return;
-        switch (`${e.currentTarget.id},current:${currentCounting}`) {
+        if (this.state.counting) return;
+        switch (`${e.currentTarget.id},current:${this.state.currentCounting}`) {
             case 'break-decrement,current:Session':
-                if (breakLength > 1) {
-                    setBreakLength(breakLength - 1);
+                if (this.state.breakLength > 1) {
+                    this.setState(state => ({
+                        breakLength: state.breakLength - 1,
+                    }));
                     return;
                 } else {
                     return;
                 }
             case 'break-increment,current:Session':
-                if (breakLength < 60) {
-                    setBreakLength(breakLength + 1);
+                if (this.state.breakLength < 60) {
+                    this.setState(state => ({
+                        breakLength: state.breakLength + 1
+                    }));
                     return;
                 } else {
                     return;
                 }
             case 'break-decrement,current:Break':
-                if (breakLength > 1) {
-                    setBreakLength(breakLength - 1);
-                    setTimeLeft(timeLeft - 60);
+                if (this.state.breakLength > 1) {
+                    this.setState(state => ({
+                        breakLength: state.breakLength - 1,
+                        timeLeft: state.timeLeft - 60,
+                    }));
                     return;
                 } else {
                     return;
                 }
             case 'break-increment,current:Break':
-                if (breakLength < 60) {
-                    setBreakLength(breakLength + 1);
-                    setTimeLeft(timeLeft + 60);
+                if (this.state.breakLength < 60) {
+                    this.setState(state => ({
+                        breakLength: state.breakLength + 1,
+                        timeLeft: state.timeLeft + 60,
+                    }));
                     return;
                 } else {
                     return;
                 }
             case 'session-decrement,current:Session':
-                if (sessionLength > 1) {
-                    setSessionLength(sessionLength - 1);
-                    setTimeLeft(timeLeft - 60);
+                if (this.state.sessionLength > 1) {
+                    this.setState(state => ({
+                        sessionLength: state.sessionLength - 1,
+                        timeLeft: state.timeLeft - 60,
+                    }));
                     return;
                 } else {
                     return;
                 }
             case 'session-increment,current:Session':
-                if (sessionLength < 60) {
-                    setSessionLength(sessionLength + 1);
-                    setTimeLeft(timeLeft + 60);
+                if (this.state.sessionLength < 60) {
+                    this.setState(state => ({
+                        sessionLength: state.sessionLength + 1,
+                        timeLeft: state.timeLeft + 60,
+                    }));
                     return;
                 } else {
                     return;
                 }
             case 'session-decrement,current:Break':
-                if (sessionLength > 1) {
-                    setSessionLength(sessionLength - 1);
+                if (this.state.sessionLength > 1) {
+                    this.setState(state => ({
+                        sessionLength: state.sessionLength - 1,
+                    }));
                     return;
                 } else {
                     return;
                 }
             case 'session-increment,current:Break':
-                if (sessionLength < 60) {
-                    setSessionLength(sessionLength + 1);
+                if (this.state.sessionLength < 60) {
+                    this.setState(state => ({
+                        sessionLength: state.sessionLength + 1,
+                    }));
                     return;
                 } else {
                     return;
@@ -123,49 +164,55 @@ function Pomodoro(props) {
 
     }
 
-    function tick() {
+    tick() {
 
         // change color when time left <= 60
-        if (timeLeft <= 60) {
+        if (this.state.timeLeft <= 60) {
             document.getElementById('time-left').style.color = "#F8BFCE";
         } else {
             document.getElementById('time-left').style.color = null;
         }
-        if (timeLeft <= 0) {
+        if (this.state.timeLeft <= 0) {
 
-            clearInterval(intervalID);
+            clearInterval(this.intervalID);
             const audio = document.getElementById('beep');
             audio.play();
-            const newCurrentCounting = (currentCounting === 'Session') ? 'Break' : 'Session';
-            const newTimeLeft = (currentCounting === 'Session') ? breakLength * 60 : sessionLength * 60;
+            const newCurrentCounting = (this.state.currentCounting === 'Session') ? 'Break' : 'Session';
+            const newTimeLeft = (this.state.currentCounting === 'Session') ? this.state.breakLength * 60 : this.state.sessionLength * 60;
 
             document.getElementById('time-left').style.color = null;
-
-            setTimeLeft(newTimeLeft);
-            setCurrentCounting(newCurrentCounting);
-            intervalID = setInterval(() => { tick() }, 1000);
+            this.setState({
+                timeLeft: newTimeLeft,
+                currentCounting: newCurrentCounting,
+            });
+            this.intervalID = setInterval(() => { this.tick() }, 1000);
             return;
         };
 
 
-        setTimeLeft(timeLeft - 1);
 
-        document.getElementsByTagName('title')[0].text = `(${clockify(timeLeft)}) Pomodoro Clock`;
+        this.setState({
+            timeLeft: this.state.timeLeft - 1
+        });
+
+        document.getElementsByTagName('title')[0].text = `(${this.clockify(this.state.timeLeft)}) Pomodoro Clock`;
 
     }
 
-    function handleStartToggle() {
-        if (!isCounting) {
-            intervalID = setInterval(() => { tick() }, 1000);
+    handleStartToggle() {
+        if (!this.state.counting) {
+            this.intervalID = setInterval(() => { this.tick() }, 1000);
         } else {
-            clearInterval(intervalID);
+            clearInterval(this.intervalID);
         }
 
-        setIsCounting(!isCounting);
+        this.setState(state => ({
+            counting: !this.state.counting,
+        }));
 
     }
 
-    function clockify(timeInSecs) {
+    clockify(timeInSecs) {
         let minutes = Math.floor(timeInSecs / 60);
         let seconds = timeInSecs - 60 * minutes;
         // insure mm:ss format at any time
@@ -175,39 +222,39 @@ function Pomodoro(props) {
         return minutes + ':' + seconds
     }
 
-    const controlPanelList = ['Break', 'Session'].map((v) => (
-        <ControlPanel
-            value={v}
-            key={`${v}-panel`}
-            currentCounting={currentCounting}
-            length={(v === 'Break') ? breakLength : sessionLength}
-            handleInDecrement={handleInDecrement}
-            handleDefaultBtn={handleDefaultBtn}
-            // english={english}
-            LANG_MAP={props.LANG_MAP}
-            lang={props.lang}
-        />
-    ));
+    render() {
 
-
-    return (
-        <div id='pomodoro-panel'>
-            <h1>{(props.lang === 'en') ? 'Pomodoro Clock' : props.LANG_MAP['Pomodoro Clock']}</h1>
-            <DisplayPanel
-                timeLeft={clockify(timeLeft)}
-                handleReset={handleReset}
-                handleStartToggle={handleStartToggle}
-                currentCounting={currentCounting}
-                LANG_MAP={props.LANG_MAP}
-                lang={props.lang}
+        const controlPanelList = ['Break', 'Session'].map((v) => (
+            <ControlPanel
+                value={v}
+                key={`${v}-panel`}
+                currentCounting={this.state.currentCounting}
+                length={(v === 'Break') ? this.state.breakLength : this.state.sessionLength}
+                handleInDecrement={this.handleInDecrement}
+                handleDefaultBtn={this.handleDefaultBtn}
+                lang={this.props.lang}
+                LANG_MAP={this.props.LANG_MAP}
             />
-            <div id='control-panels-group' className='btn-group'>
-                {controlPanelList}
+        ));
+        return (
+            <div id='pomodoro-panel'>
+                <h1>{(this.props.lang === 'en') ? 'Pomodoro Clock' : this.props.LANG_MAP['Pomodoro Clock']}</h1>
+                <DisplayPanel
+                    timeLeft={this.clockify(this.state.timeLeft)}
+                    handleReset={this.handleReset}
+                    handleStartToggle={this.handleStartToggle}
+                    currentCounting={this.state.currentCounting}
+                    lang={this.props.lang}
+                    LANG_MAP={this.props.LANG_MAP}
+                />
+                <div id='control-panels-group' className='btn-group'>
+                    {controlPanelList}
+                </div>
+                <audio id="beep" preload="auto" src="https://raw.githubusercontent.com/tsunghao-huang/react-pomodoro/gh-pages/homeland.mp3"></audio>
             </div>
-            <audio id="beep" preload="auto" src="https://raw.githubusercontent.com/tsunghao-huang/react-pomodoro/gh-pages/homeland.mp3"></audio>
-        </div>
 
-    )
+        )
+    }
 }
 
 export default Pomodoro;

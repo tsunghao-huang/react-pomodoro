@@ -29,7 +29,7 @@ const LANG_MAP = {
 
 function App() {
 
-    const [lang, setLang] = useState('zh-TW');
+    const [lang, setLang] = useState('en');
 
     function handleLanguage() {
         (lang === 'en') ? setLang('zh-TW') : setLang('en');
