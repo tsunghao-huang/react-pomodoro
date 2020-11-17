@@ -17,7 +17,8 @@ function Form(props) {
         <form onSubmit={handleSubmit}>
             <h2 className="label-wrapper">
                 <label htmlFor="new-todo-input" className="label__lg">
-                    What needs to be done?
+                    {(props.lang === 'en') ? 'What needs to be done?'
+                        : props.LANG_MAP['What needs to be done?']}
                 </label>
             </h2>
             <input
@@ -30,7 +31,7 @@ function Form(props) {
                 onChange={handleChange}
             />
             <button type="submit" className="btn btn__primary btn__lg">
-                Add
+                {(props.lang === 'en') ? 'Add' : props.LANG_MAP['Add']}
             </button>
         </form>
     );

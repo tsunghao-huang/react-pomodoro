@@ -78,6 +78,8 @@ export default function TodoApp(props) {
                 toggleTaskCompleted={toggleTaskCompleted}
                 deleteTask={deleteTask}
                 editTask={editTask}
+                lang={props.lang}
+                LANG_MAP={props.LANG_MAP}
             />
         ));
 
@@ -87,11 +89,19 @@ export default function TodoApp(props) {
             name={name}
             isPressed={name === filter}
             setFilter={setFilter}
+            lang={props.lang}
+            LANG_MAP={props.LANG_MAP}
         />
     ));
 
     const tasksNoun = taskList.length !== 1 ? 'tasks' : 'task';
-    const headingText = `${taskList.length} ${tasksNoun} remaining`;
+    let headingText;
+
+    if (props.lang === 'en') {
+        headingText = `${taskList.length} ${tasksNoun} remaining`;
+    } else {
+        headingText = `剩下 ${taskList.length} 件事`;
+    }
 
     const listHeadingRef = useRef(null);
     const prevTaskLength = usePrevious(tasks.length);
@@ -104,8 +114,8 @@ export default function TodoApp(props) {
 
     return (
         <div id="todoapp" className="stack-large">
-            <h1>Todos</h1>
-            <Form addTask={addTask} />
+            <h1>{(props.lang === 'en') ? 'Todos' : props.LANG_MAP['Todos']}</h1>
+            <Form addTask={addTask} lang={props.lang} LANG_MAP={props.LANG_MAP} />
             <div className="filters btn-group stack-exception">
                 {filterList}
             </div>

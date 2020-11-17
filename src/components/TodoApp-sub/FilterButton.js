@@ -9,7 +9,7 @@ function FilterButton(props) {
             onClick={() => props.setFilter(props.name)}
         >
             <span className="visually-hidden">Show </span>
-            <span>{props.name} </span>
+            <span>{(props.lang === 'en') ? props.name : props.LANG_MAP[props.name]} </span>
             <span className="visually-hidden"> tasks</span>
         </button>
     );
