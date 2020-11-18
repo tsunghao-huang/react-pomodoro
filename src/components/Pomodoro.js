@@ -223,35 +223,31 @@ class Pomodoro extends React.Component {
     }
 
     render() {
-        const mandarinLabel = {
-            'Pomodoro Clock': '蕃 茄 鐘',
-            Session: '工 作',
-            Break: '休 息'
-        }
 
         const controlPanelList = ['Break', 'Session'].map((v) => (
             <ControlPanel
                 value={v}
                 key={`${v}-panel`}
                 currentCounting={this.state.currentCounting}
-                length={this.state[`${v.toLowerCase()}Length`]}
+                length={(v === 'Break') ? this.state.breakLength : this.state.sessionLength}
                 handleInDecrement={this.handleInDecrement}
                 handleDefaultBtn={this.handleDefaultBtn}
-                english={this.state.english}
-                mandarinLabel={mandarinLabel} />
+                lang={this.props.lang}
+                LANG_MAP={this.props.LANG_MAP}
+            />
         ));
         return (
             <div id='pomodoro-panel'>
-                <h1>{(this.state.english) ? 'Pomodoro Clock' : mandarinLabel['Pomodoro Clock']}</h1>
-                <button aria-label={`switch language to ${this.state.english ? 'Mandarin' : 'English'}`} id='language-btn' onClick={this.handleLanguage}>{(this.state.english) ? '繁體中文' : 'English'}</button>
+                <h1>{(this.props.lang === 'en') ? 'Pomodoro Clock' : this.props.LANG_MAP['Pomodoro Clock']}</h1>
                 <DisplayPanel
                     timeLeft={this.clockify(this.state.timeLeft)}
                     handleReset={this.handleReset}
                     handleStartToggle={this.handleStartToggle}
                     currentCounting={this.state.currentCounting}
-                    english={this.state.english}
-                    mandarinLabel={mandarinLabel} />
-                <div id='control-panels-group'>
+                    lang={this.props.lang}
+                    LANG_MAP={this.props.LANG_MAP}
+                />
+                <div id='control-panels-group' className='btn-group'>
                     {controlPanelList}
                 </div>
                 <audio id="beep" preload="auto" src="https://raw.githubusercontent.com/tsunghao-huang/react-pomodoro/gh-pages/homeland.mp3"></audio>

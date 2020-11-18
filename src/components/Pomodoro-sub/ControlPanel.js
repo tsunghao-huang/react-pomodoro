@@ -9,9 +9,8 @@ class ControlPanel extends React.Component {
                     id={`default-${this.props.value.toLowerCase()}`}
                     onClick={this.props.handleDefaultBtn}
                 >
-                    {(this.props.english) ? this.props.value : this.props.mandarinLabel[this.props.value]}
+                    {(this.props.lang === 'en') ? this.props.value : this.props.LANG_MAP[this.props.value]}
                 </button>
-                {/* <p id={`${this.props.value.toLowerCase()}-label`}>{(this.props.english) ? `Custom ${this.props.value}` : `自 訂 ${mandarinLabel[this.props.value]}`}</p> */}
 
                 <div>
                     <button
