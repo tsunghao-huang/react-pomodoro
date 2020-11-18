@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 import Pomodoro from './components/Pomodoro';
-<<<<<<< HEAD
-=======
 import TodoApp from './components/TodoApp';
 
 const DATA = [
@@ -28,7 +26,6 @@ const LANG_MAP = {
     Cancel: '取消',
     Save: '儲存'
 };
->>>>>>> todo
 
 function App() {
 
@@ -40,15 +37,10 @@ function App() {
     }
 
     return (
-<<<<<<< HEAD
-        <div>
-            <Pomodoro />
-=======
         <div id="App">
             <button aria-label={`switch language to ${(lang === 'en') ? 'Mandarin' : 'English'}`} id='language-btn' onClick={handleLanguage}>{(lang === 'en') ? '繁體中文' : 'English'}</button>
             <Pomodoro lang={lang} LANG_MAP={LANG_MAP} />
             <TodoApp tasks={DATA} lang={lang} LANG_MAP={LANG_MAP} />
->>>>>>> todo
         </div>
 
     )
