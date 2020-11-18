@@ -98,9 +98,16 @@ export default function TodoApp(props) {
     let headingText;
 
     if (props.lang === 'en') {
-        headingText = `${taskList.length} ${tasksNoun} remaining`;
+        switch (filter) {
+            case 'All':
+                headingText = `${taskList.length} ${tasksNoun} in total`;
+                break;
+            default:
+                headingText = `${taskList.length} ${tasksNoun} ${filter.toLowerCase()}`;
+        }
+
     } else {
-        headingText = `剩下 ${taskList.length} 件事`;
+        headingText = `${props.LANG_MAP[filter]} ${taskList.length} 件事`;
     }
 
     const listHeadingRef = useRef(null);

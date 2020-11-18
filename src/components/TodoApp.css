@@ -53,6 +53,10 @@
   border: 2px solid #cacaca;
 }
 
+/* .btn__danger {
+  background-color: rgb(218, 119, 112);
+} */
+
 #list-heading {
   font-size: 1.5rem;
   text-align: center;
