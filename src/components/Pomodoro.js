@@ -200,6 +200,10 @@ class Pomodoro extends React.Component {
     }
 
     handleStartToggle() {
+        const audio = document.getElementById('beep');
+        audio.play();
+        audio.pause();
+        audio.currentTime = 0;
         if (!this.state.counting) {
             this.intervalID = setInterval(() => { this.tick() }, 1000);
         } else {
