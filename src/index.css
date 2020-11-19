@@ -1,5 +1,5 @@
 body {
-  font-family: "Lalezar", cursive;
+  font-family: "Oswald", sans-serif;
   background-color: #155e5c;
   color: white;
   min-height: 100vh;
@@ -38,6 +38,7 @@ body {
   margin-top: 2rem;
   padding-left: 3rem;
   padding-right: 3rem;
+  max-height: 100vh;
 }
 
 h1 {
@@ -69,8 +70,9 @@ button {
   text-shadow: none;
   border: none;
   outline: none;
-  font-family: "Lalezar", cursive;
+  font-family: "Oswald", sans-serif;
   border-radius: 10px;
+  padding-bottom: 1.5px;
 }
 
 button:active {
@@ -106,7 +108,6 @@ button:hover {
   top: 1rem;
   margin-top: 0;
   margin-bottom: 0;
-  padding: 0 0;
 }
 
 #language-btn:hover {
@@ -132,7 +133,7 @@ button:hover {
 }
 
 #timer-label {
-  font-family: "Lalezar", cursive;
+  font-family: "Oswald", sans-serif;
   font-size: 4vmax;
   margin: 0 0;
 }
@@ -167,7 +168,6 @@ button:hover {
   width: 9rem;
   font-size: 1.5rem;
   /* color: #155e5c; */
-  padding: 0 0;
 }
 
 .btn-group {
