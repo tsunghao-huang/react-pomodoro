@@ -74,10 +74,11 @@
 ul {
   list-style: none;
   padding: 0;
+  margin-top: 0;
 }
 
 .todo-list > * + * {
-  margin-top: 2rem;
+  margin-top: 1.2rem;
 }
 
 .todo-label {

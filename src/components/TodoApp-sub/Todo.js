@@ -16,9 +16,8 @@ export default function Todo(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (e.target.value === "") return;
+        if (newName.replace(/\s*/, "") === "") return;
         props.editTask(props.id, newName);
-        // setNewName("");
         setEditing(false);
     }
 
@@ -35,6 +34,7 @@ export default function Todo(props) {
                     value={newName}
                     onChange={handleChange}
                     ref={editFieldRef}
+                    required={true}
                 />
             </div>
             <div className="btn-group">
@@ -92,13 +92,14 @@ export default function Todo(props) {
         if (!wasEditing && isEditing) {
             editFieldRef.current.select();
             editFieldRef.current.focus();
-            // setNewName(props.name);
+            // initiated value for the input field
+            setNewName(props.name);
         }
         if (wasEditing && !isEditing) {
             editButtonRef.current.focus();
         }
 
-    }, [wasEditing, isEditing]);
+    }, [wasEditing, isEditing, props.name]);
 
     return (
         <li className="todo stack-small">

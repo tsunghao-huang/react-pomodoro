@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
@@ -31,9 +31,12 @@ function App() {
 
     const [lang, setLang] = useState('en');
 
+    useEffect(() => {
+        document.documentElement.setAttribute('lang', lang);
+    }, [lang]);
+
     function handleLanguage() {
         (lang === 'en') ? setLang('zh-TW') : setLang('en');
-        document.documentElement.setAttribute('lang', lang);
     }
 
     return (

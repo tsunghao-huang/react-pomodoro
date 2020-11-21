@@ -9,7 +9,7 @@ function Form(props) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (name === "") return;
+        if (name.replace(/\s*/, "") === "") return;
         props.addTask(name);
         setName("");
     }
@@ -29,6 +29,7 @@ function Form(props) {
                 autoComplete="off"
                 value={name}
                 onChange={handleChange}
+                required={true}
             />
             <button type="submit" className="btn btn__primary btn__lg">
                 {(props.lang === 'en') ? 'Add' : props.LANG_MAP['Add']}

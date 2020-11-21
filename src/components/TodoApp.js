@@ -29,7 +29,8 @@ export default function TodoApp(props) {
     }
 
     function addTask(name) {
-        const newTask = { id: "todo-" + nanoid(), name: name, completed: false };
+        const sanitizedName = name.replace(/(^\s*)|(\s*$)/g, "");
+        const newTask = { id: "todo-" + nanoid(), name: sanitizedName, completed: false };
         setTasks([...tasks, newTask]);
         updateLocalStorage([...tasks, newTask]);
     }
@@ -55,11 +56,12 @@ export default function TodoApp(props) {
     }
 
     function editTask(id, newName) {
+        const sanitizedNewName = newName.replace(/(^\s*)|(\s*$)/g, "");
         const editedTaskList = tasks.map(task => {
             // if this task has the same ID as the edited task
             if (id === task.id) {
                 //
-                return { ...task, name: newName };
+                return { ...task, name: sanitizedNewName };
             }
             return task;
         });
