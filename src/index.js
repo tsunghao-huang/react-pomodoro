@@ -6,9 +6,9 @@ import Pomodoro from './components/Pomodoro';
 import TodoApp from './components/TodoApp';
 
 const DATA = [
-    { id: "todo-0", name: "Eat", completed: true },
-    { id: "todo-1", name: "Sleep", completed: false },
-    { id: "todo-2", name: "Repeat", completed: false }
+    { id: "todo-0", name: "Eat", completed: true, completedSessions: 1, targetSessions: 2 },
+    { id: "todo-1", name: "Sleep", completed: false, completedSessions: 0, targetSessions: 0 },
+    { id: "todo-2", name: "Repeat", completed: false, completedSessions: 0, targetSessions: 0 }
 ];
 
 const LANG_MAP = {

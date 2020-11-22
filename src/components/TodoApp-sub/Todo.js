@@ -8,34 +8,71 @@ export default function Todo(props) {
 
     const [isEditing, setEditing] = useState(false);
     const [newName, setNewName] = useState(props.name);
+    const [newTargetSessions, setNewTargetSessions] = useState(props.targetSessions);
+    const [newCompletedSessions, setNewCompletedSessions] = useState(props.completedSessions);
     const wasEditing = usePrevious(isEditing);
 
     function handleChange(e) {
-        setNewName(e.target.value);
+        if (e.target.id.includes('completed-sessions')) {
+            setNewCompletedSessions(e.target.value);
+        } else if (e.target.id.includes('target-sessions')) {
+            setNewTargetSessions(e.target.value);
+        } else {
+            setNewName(e.target.value);
+        }
+
     }
 
     function handleSubmit(e) {
         e.preventDefault();
         if (newName.replace(/\s*/, "") === "") return;
-        props.editTask(props.id, newName);
+        props.editTask(props.id, newName, newCompletedSessions, newTargetSessions);
         setEditing(false);
     }
 
     const editingTemplate = (
         <form className="stack-small" onSubmit={handleSubmit}>
             <div className="form-group">
-                <label className="todo-label" htmlFor={props.id}>
-                    {(props.lang === 'en') ? `New name for ${props.name}` : `${props.name} 的新名字`}
-                </label>
-                <input
-                    id={props.id}
-                    className="todo-text"
-                    type="text"
-                    value={newName}
-                    onChange={handleChange}
-                    ref={editFieldRef}
-                    required={true}
-                />
+                <fieldset id="todo-fieldset">
+                    <label className="todo-label" htmlFor={props.id}>
+                        {(props.lang === 'en') ? `New name for ${props.name}` : `${props.name} 的新名字`}
+                    </label>
+                    <input
+                        id={props.id}
+                        className="input input__lg"
+                        type="text"
+                        value={newName}
+                        onChange={handleChange}
+                        ref={editFieldRef}
+                        required={true}
+                    />
+                    <label className="todo-label" htmlFor={`${props.id}-completed-sessions`}>
+                        Completed sessions
+                    </label>
+                    <input
+                        id={`${props.id}-completed-sessions`}
+                        className="input input__lg"
+                        type="number"
+                        value={newCompletedSessions}
+                        onChange={handleChange}
+                        min="0"
+                        placeholder="Sessions?"
+                    />
+                    <label className="todo-label" htmlFor={`${props.id}-target-sessions`}>
+                        Target sessions
+                    </label>
+                    <input
+                        id={`${props.id}-target-sessions`}
+                        className="input input__lg"
+                        type="number"
+                        value={newTargetSessions}
+                        onChange={handleChange}
+                        min="0"
+                        placeholder="Sessions?"
+                    />
+
+                </fieldset>
+
             </div>
             <div className="btn-group">
                 <button
@@ -63,7 +100,7 @@ export default function Todo(props) {
                     onChange={() => props.toggleTaskCompleted(props.id)}
                 />
                 <label className="todo-label" htmlFor={props.id}>
-                    {props.name}
+                    {props.name}: {(props.targetSessions) ? `${props.completedSessions ? props.completedSessions : 0}/${props.targetSessions}` : ''}
                 </label>
             </div>
             <div className="btn-group">

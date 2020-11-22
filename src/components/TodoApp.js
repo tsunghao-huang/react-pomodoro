@@ -15,18 +15,21 @@ const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 export default function TodoApp(props) {
 
-    const localStorageKey = 'localTodo';
-    if (localStorage.getItem(localStorageKey) === null) {
-        localStorage.setItem(localStorageKey, JSON.stringify(props.tasks));
-    }
-    const localTodo = JSON.parse(localStorage.getItem(localStorageKey));
-    const [tasks, setTasks] = useState(localTodo);
-    const [filter, setFilter] = useState('All');
+    // const localStorageKey = 'localTodo';
+    // if (localStorage.getItem(localStorageKey) === null) {
+    //     localStorage.setItem(localStorageKey, JSON.stringify(props.tasks));
+    // }
+    // const localTodo = JSON.parse(localStorage.getItem(localStorageKey));
+    // const [tasks, setTasks] = useState(localTodo);
+
 
     function updateLocalStorage(updatedTodos) {
-        // localStorage.removeItem(localStorageKey);
-        localStorage.setItem(localStorageKey, JSON.stringify(updatedTodos));
+        return;
+        // localStorage.setItem(localStorageKey, JSON.stringify(updatedTodos));
     }
+    const [tasks, setTasks] = useState(props.tasks);
+
+    const [filter, setFilter] = useState('All');
 
     function addTask(name) {
         const sanitizedName = name.replace(/(^\s*)|(\s*$)/g, "");
@@ -55,13 +58,20 @@ export default function TodoApp(props) {
         updateLocalStorage(remainingTasks);
     }
 
-    function editTask(id, newName) {
+    function editTask(id, newName, newCompletedSessions, newTargetSessions) {
         const sanitizedNewName = newName.replace(/(^\s*)|(\s*$)/g, "");
         const editedTaskList = tasks.map(task => {
             // if this task has the same ID as the edited task
             if (id === task.id) {
                 //
-                return { ...task, name: sanitizedNewName };
+                return {
+                    ...task,
+                    ...{
+                        name: sanitizedNewName,
+                        completedSessions: newCompletedSessions,
+                        targetSessions: newTargetSessions
+                    }
+                };
             }
             return task;
         });
@@ -82,6 +92,8 @@ export default function TodoApp(props) {
                 editTask={editTask}
                 lang={props.lang}
                 LANG_MAP={props.LANG_MAP}
+                completedSessions={task.completedSessions}
+                targetSessions={task.targetSessions}
             />
         ));
 

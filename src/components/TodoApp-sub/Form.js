@@ -2,9 +2,15 @@ import React, { useState } from "react";
 
 function Form(props) {
     const [name, setName] = useState("");
+    const [targetSessions, setTargetSessions] = useState("");
 
     function handleChange(e) {
-        setName(e.target.value);
+        if (e.target.id === 'new-todo-input') {
+            setName(e.target.value);
+        } else if (e.target.id === 'new-todo-target-session') {
+            setTargetSessions(e.target.value);
+        }
+
     }
 
     function handleSubmit(e) {
@@ -21,16 +27,28 @@ function Form(props) {
                         : props.LANG_MAP['What needs to be done?']}
                 </label>
             </h2>
-            <input
-                type="text"
-                id="new-todo-input"
-                className="input input__lg"
-                name="text"
-                autoComplete="off"
-                value={name}
-                onChange={handleChange}
-                required={true}
-            />
+            <fieldset id="new-todo-fieldset">
+                <input
+                    type="text"
+                    id="new-todo-input"
+                    className="input input__lg"
+                    name="text"
+                    autoComplete="off"
+                    value={name}
+                    onChange={handleChange}
+                    required={true}
+                />
+                <input
+                    type="number"
+                    id="new-todo-target-session"
+                    className="input input__lg"
+                    value={targetSessions}
+                    onChange={handleChange}
+                    min="0"
+                    placeholder="Sessions?"
+                />
+            </fieldset>
+
             <button type="submit" className="btn btn__primary btn__lg">
                 {(props.lang === 'en') ? 'Add' : props.LANG_MAP['Add']}
             </button>
