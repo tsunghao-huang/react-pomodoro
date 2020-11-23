@@ -16,11 +16,10 @@ export default function Todo(props) {
         if (e.target.id.includes('completed-sessions')) {
             setNewCompletedSessions(e.target.value);
         } else if (e.target.id.includes('target-sessions')) {
-            setNewTargetSessions(e.target.value);
+            setNewTargetSessions(parseInt(e.target.value));
         } else {
-            setNewName(e.target.value);
+            setNewName(parseInt(e.target.value));
         }
-
     }
 
     function handleSubmit(e) {
@@ -56,6 +55,7 @@ export default function Todo(props) {
                         value={newCompletedSessions}
                         onChange={handleChange}
                         min="0"
+                        max={newTargetSessions}
                         placeholder="Sessions?"
                     />
                     <label className="todo-label" htmlFor={`${props.id}-target-sessions`}>
@@ -67,7 +67,8 @@ export default function Todo(props) {
                         type="number"
                         value={newTargetSessions}
                         onChange={handleChange}
-                        min="0"
+                        min={newCompletedSessions}
+                        max="57"
                         placeholder="Sessions?"
                     />
 
@@ -100,7 +101,8 @@ export default function Todo(props) {
                     onChange={() => props.toggleTaskCompleted(props.id)}
                 />
                 <label className="todo-label" htmlFor={props.id}>
-                    {props.name}: {(props.targetSessions) ? `${props.completedSessions ? props.completedSessions : 0}/${props.targetSessions}` : ''}
+                    {props.name}:
+                    {(props.targetSessions === 0 | props.targetSessions === undefined) ? '' : `${props.completedSessions ? props.completedSessions : 0}/${props.targetSessions}`}
                 </label>
             </div>
             <div className="btn-group">
@@ -131,12 +133,14 @@ export default function Todo(props) {
             editFieldRef.current.focus();
             // initiated value for the input field
             setNewName(props.name);
+            setNewCompletedSessions(props.completedSessions);
+            setNewTargetSessions(props.targetSessions);
         }
         if (wasEditing && !isEditing) {
             editButtonRef.current.focus();
         }
 
-    }, [wasEditing, isEditing, props.name]);
+    }, [wasEditing, isEditing, props.name, props.completedSessions, props.targetSessions]);
 
     return (
         <li className="todo stack-small">

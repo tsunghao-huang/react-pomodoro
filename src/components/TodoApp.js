@@ -31,23 +31,40 @@ export default function TodoApp(props) {
 
     const [filter, setFilter] = useState('All');
 
-    function addTask(name) {
+    function addTask(name, targetSessions) {
         const sanitizedName = name.replace(/(^\s*)|(\s*$)/g, "");
-        const newTask = { id: "todo-" + nanoid(), name: sanitizedName, completed: false };
+        const newTask = {
+            id: "todo-" + nanoid(),
+            name: sanitizedName,
+            completed: false,
+            completedSessions: 0,
+            targetSessions: targetSessions
+        };
         setTasks([...tasks, newTask]);
         updateLocalStorage([...tasks, newTask]);
     }
 
     function toggleTaskCompleted(id) {
-        const updatedTasks = tasks.map(task => {
-            // if this task has the same ID as the edited task
-            if (id === task.id) {
-                // use object spread to make a new obj
-                // whose `completed` prop has been inverted
-                return { ...task, completed: !task.completed }
-            }
-            return task;
-        });
+        const updatedTasks = tasks
+            .map(task => {
+                // if this task has the same ID as the edited task
+                if (id === task.id) {
+                    // use object spread to make a new obj
+                    // whose `completed` prop has been inverted
+                    return { ...task, completed: !task.completed }
+                }
+                return task;
+            })
+            .map(task => { // update completedSessions with toggle
+                if (task.completed) {
+                    return { ...task, completedSessions: task.targetSessions };
+                } else if (task.completedSessions === task.targetSessions) {
+                    // task not completed but have the same completed & target sessions
+                    // reset completedSessions to 0;
+                    return { ...task, completedSessions: 0 };
+                }
+                return task;
+            })
         setTasks(updatedTasks);
         updateLocalStorage(updatedTasks);
     }
@@ -60,21 +77,31 @@ export default function TodoApp(props) {
 
     function editTask(id, newName, newCompletedSessions, newTargetSessions) {
         const sanitizedNewName = newName.replace(/(^\s*)|(\s*$)/g, "");
-        const editedTaskList = tasks.map(task => {
-            // if this task has the same ID as the edited task
-            if (id === task.id) {
-                //
-                return {
-                    ...task,
-                    ...{
-                        name: sanitizedNewName,
-                        completedSessions: newCompletedSessions,
-                        targetSessions: newTargetSessions
-                    }
-                };
-            }
-            return task;
-        });
+        const editedTaskList = tasks
+            .map(task => {
+                // if this task has the same ID as the edited task
+                if (id === task.id) {
+                    //
+                    return {
+                        ...task,
+                        ...{
+                            name: sanitizedNewName,
+                            completedSessions: newCompletedSessions,
+                            targetSessions: newTargetSessions
+                        }
+                    };
+                }
+                return task;
+            })
+            .map(task => { // validate target & completed sessions
+                if (task.targetSessions === task.completedSessions) {
+                    return { ...task, completed: true }
+                } else {
+                    return { ...task, completed: false }
+                }
+            })
+
+        console.log(editedTaskList);
         setTasks(editedTaskList);
         updateLocalStorage(editedTaskList);
     }

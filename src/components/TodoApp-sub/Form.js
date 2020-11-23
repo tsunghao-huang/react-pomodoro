@@ -16,7 +16,7 @@ function Form(props) {
     function handleSubmit(e) {
         e.preventDefault();
         if (name.replace(/\s*/, "") === "") return;
-        props.addTask(name);
+        props.addTask(name, targetSessions);
         setName("");
     }
     return (
@@ -45,7 +45,8 @@ function Form(props) {
                     value={targetSessions}
                     onChange={handleChange}
                     min="0"
-                    placeholder="Sessions?"
+                    max="57"
+                    placeholder="Target sessions?"
                 />
             </fieldset>
 
