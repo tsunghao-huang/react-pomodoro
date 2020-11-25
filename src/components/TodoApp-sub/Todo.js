@@ -16,7 +16,7 @@ export default function Todo(props) {
         if (e.target.id.includes('completed-sessions')) {
             setNewCompletedSessions(e.target.value);
         } else if (e.target.id.includes('target-sessions')) {
-            setNewTargetSessions(parseInt(e.target.value));
+            setNewTargetSessions(e.target.value);
         } else {
             setNewName(e.target.value);
         }

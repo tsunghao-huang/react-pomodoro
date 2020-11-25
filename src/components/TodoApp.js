@@ -87,8 +87,8 @@ export default function TodoApp(props) {
                         ...task,
                         ...{
                             name: sanitizedNewName,
-                            completedSessions: parseInt(newCompletedSessions),
-                            targetSessions: parseInt(newTargetSessions)
+                            completedSessions: (newCompletedSessions === "") ? 0 : parseInt(newCompletedSessions),
+                            targetSessions: (newTargetSessions === "") ? 0 : parseInt(newTargetSessions)
                         }
                     };
                 }
