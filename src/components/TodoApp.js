@@ -38,8 +38,9 @@ export default function TodoApp(props) {
             name: sanitizedName,
             completed: false,
             completedSessions: 0,
-            targetSessions: targetSessions
+            targetSessions: (targetSessions === "") ? 0 : parseInt(targetSessions)
         };
+        console.log(newTask);
         setTasks([...tasks, newTask]);
         updateLocalStorage([...tasks, newTask]);
     }
@@ -57,7 +58,7 @@ export default function TodoApp(props) {
             })
             .map(task => { // update completedSessions with toggle
                 if (task.completed) {
-                    return { ...task, completedSessions: task.targetSessions };
+                    return { ...task, completedSessions: parseInt(task.targetSessions) };
                 } else if (task.completedSessions === task.targetSessions) {
                     // task not completed but have the same completed & target sessions
                     // reset completedSessions to 0;
@@ -86,18 +87,20 @@ export default function TodoApp(props) {
                         ...task,
                         ...{
                             name: sanitizedNewName,
-                            completedSessions: newCompletedSessions,
-                            targetSessions: newTargetSessions
+                            completedSessions: parseInt(newCompletedSessions),
+                            targetSessions: parseInt(newTargetSessions)
                         }
                     };
                 }
                 return task;
             })
             .map(task => { // validate target & completed sessions
-                if (task.targetSessions === task.completedSessions) {
+                if ((task.targetSessions !== 0) && (task.targetSessions === task.completedSessions)) {
                     return { ...task, completed: true }
-                } else {
+                } else if ((task.targetSessions !== 0) && (task.targetSessions !== task.completedSessions)) {
                     return { ...task, completed: false }
+                } else {
+                    return task;
                 }
             })
 

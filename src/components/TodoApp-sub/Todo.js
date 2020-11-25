@@ -38,7 +38,7 @@ export default function Todo(props) {
                     </label>
                     <input
                         id={props.id}
-                        className="input input__lg"
+                        className="input input__lg edit-todo-name"
                         type="text"
                         value={newName}
                         onChange={handleChange}
@@ -50,7 +50,7 @@ export default function Todo(props) {
                     </label>
                     <input
                         id={`${props.id}-completed-sessions`}
-                        className="input input__lg"
+                        className="input input__lg edit-todo-sessions"
                         type="number"
                         value={newCompletedSessions}
                         onChange={handleChange}
@@ -63,7 +63,7 @@ export default function Todo(props) {
                     </label>
                     <input
                         id={`${props.id}-target-sessions`}
-                        className="input input__lg"
+                        className="input input__lg edit-todo-sessions"
                         type="number"
                         value={newTargetSessions}
                         onChange={handleChange}
@@ -75,18 +75,25 @@ export default function Todo(props) {
                 </fieldset>
 
             </div>
-            <div className="btn-group">
+            <div className="todo-btn-group">
                 <button
                     type="button"
                     className="btn todo-cancel"
                     onClick={() => setEditing(false)}
                 >
-                    {(props.lang === 'en') ? 'Cancel' : props.LANG_MAP['Cancel']}
-                    <span className="visually-hidden">renaming {props.name}</span>
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <span className="visually-hidden">
+                        {(props.lang === 'en') ? 'Cancel' : props.LANG_MAP['Cancel']}
+                        renaming {props.name}
+                    </span>
                 </button>
                 <button type="submit" className="btn btn__primary todo-edit">
-                    {(props.lang === 'en') ? 'Save' : props.LANG_MAP['Save']}
-                    <span className="visually-hidden">new name for {props.name}</span>
+                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+
+                    <span className="visually-hidden">
+                        {(props.lang === 'en') ? 'Save' : props.LANG_MAP['Save']}
+                        new name for {props.name}
+                    </span>
                 </button>
             </div>
         </form>
@@ -101,27 +108,33 @@ export default function Todo(props) {
                     onChange={() => props.toggleTaskCompleted(props.id)}
                 />
                 <label className="todo-label" htmlFor={props.id}>
-                    {props.name}:
-                    {(props.targetSessions === 0 | props.targetSessions === undefined) ? '' : `${props.completedSessions ? props.completedSessions : 0}/${props.targetSessions}`}
+                    <span className="todo-label-name">{props.name}</span>
+                    <span className="todo-label-progress">{(props.targetSessions === 0 | props.targetSessions === "") ? '' : `Progress: ${props.completedSessions ? props.completedSessions : 0}/${props.targetSessions}`}</span>
                 </label>
             </div>
-            <div className="btn-group">
+            <div className="todo-btn-group">
                 <button
                     type="button"
                     className="btn"
                     onClick={() => setEditing(true)}
                     ref={editButtonRef}
                 >
-                    {(props.lang === 'en') ? 'Edit' : props.LANG_MAP['Edit']}
-                    <span className="visually-hidden">{props.name}</span>
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <span className="visually-hidden">
+                        {(props.lang === 'en') ? 'Edit' : props.LANG_MAP['Edit']}
+                        {props.name}
+                    </span>
                 </button>
                 <button
                     type="button"
                     className="btn btn__danger"
                     onClick={() => props.deleteTask(props.id)}
                 >
-                    {(props.lang === 'en') ? 'Delete' : props.LANG_MAP['Delete']}
-                    <span className="visually-hidden">{props.name}</span>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <span className="visually-hidden">
+                        {(props.lang === 'en') ? 'Delete' : props.LANG_MAP['Delete']}
+                        {props.name}
+                    </span>
                 </button>
             </div>
         </div>
