@@ -18,7 +18,7 @@ export default function Todo(props) {
         } else if (e.target.id.includes('target-sessions')) {
             setNewTargetSessions(parseInt(e.target.value));
         } else {
-            setNewName(parseInt(e.target.value));
+            setNewName(e.target.value);
         }
     }
 
@@ -81,14 +81,14 @@ export default function Todo(props) {
                     className="btn todo-cancel"
                     onClick={() => setEditing(false)}
                 >
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <i className="fa fa-times" aria-hidden="true"></i>
                     <span className="visually-hidden">
                         {(props.lang === 'en') ? 'Cancel' : props.LANG_MAP['Cancel']}
                         renaming {props.name}
                     </span>
                 </button>
                 <button type="submit" className="btn btn__primary todo-edit">
-                    <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                    <i className="fa fa-floppy-o" aria-hidden="true"></i>
 
                     <span className="visually-hidden">
                         {(props.lang === 'en') ? 'Save' : props.LANG_MAP['Save']}
@@ -119,7 +119,7 @@ export default function Todo(props) {
                     onClick={() => setEditing(true)}
                     ref={editButtonRef}
                 >
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
                     <span className="visually-hidden">
                         {(props.lang === 'en') ? 'Edit' : props.LANG_MAP['Edit']}
                         {props.name}
@@ -130,7 +130,7 @@ export default function Todo(props) {
                     className="btn btn__danger"
                     onClick={() => props.deleteTask(props.id)}
                 >
-                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    <i className="fa fa-trash" aria-hidden="true"></i>
                     <span className="visually-hidden">
                         {(props.lang === 'en') ? 'Delete' : props.LANG_MAP['Delete']}
                         {props.name}
