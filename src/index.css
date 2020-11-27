@@ -220,7 +220,10 @@ button:hover {
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 550px) {
+  html {
+    font-size: 82%;
+  }
   #display-panel {
     width: 70vmin;
     height: 70vmin;

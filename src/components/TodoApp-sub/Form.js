@@ -46,7 +46,7 @@ function Form(props) {
                     onChange={handleChange}
                     min="0"
                     max="57"
-                    placeholder="Target sessions?"
+                    placeholder={`${(props.lang === 'en') ? 'Target sessions' : props.LANG_MAP['Target sessions']}?`}
                 />
             </fieldset>
 

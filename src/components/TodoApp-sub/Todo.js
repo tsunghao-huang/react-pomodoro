@@ -32,7 +32,7 @@ export default function Todo(props) {
     const editingTemplate = (
         <form className="stack-small" onSubmit={handleSubmit}>
             <div className="form-group">
-                <fieldset id="todo-fieldset">
+                <fieldset className="todo-fieldset">
                     <label className="todo-label" htmlFor={props.id}>
                         {(props.lang === 'en') ? `New name for ${props.name}` : `${props.name} 的新名字`}
                     </label>
@@ -45,33 +45,36 @@ export default function Todo(props) {
                         ref={editFieldRef}
                         required={true}
                     />
-                    <label className="todo-label" htmlFor={`${props.id}-completed-sessions`}>
-                        Completed sessions
-                    </label>
-                    <input
-                        id={`${props.id}-completed-sessions`}
-                        className="input input__lg edit-todo-sessions"
-                        type="number"
-                        value={newCompletedSessions}
-                        onChange={handleChange}
-                        min="0"
-                        max={newTargetSessions}
-                        placeholder="Sessions?"
-                    />
-                    <label className="todo-label" htmlFor={`${props.id}-target-sessions`}>
-                        Target sessions
-                    </label>
-                    <input
-                        id={`${props.id}-target-sessions`}
-                        className="input input__lg edit-todo-sessions"
-                        type="number"
-                        value={newTargetSessions}
-                        onChange={handleChange}
-                        min={newCompletedSessions}
-                        max="57"
-                        placeholder="Sessions?"
-                    />
-
+                    <div className='edit-todo-sessions'>
+                        <label className="todo-label todo-label-sessions" htmlFor={`${props.id}-completed-sessions`}>
+                            {(props.lang === 'en') ? 'Completed sessions' : props.LANG_MAP['Completed sessions']}
+                        </label>
+                        <input
+                            id={`${props.id}-completed-sessions`}
+                            className="input input__lg edit-todo-completed-sessions"
+                            type="number"
+                            value={newCompletedSessions}
+                            onChange={handleChange}
+                            min="0"
+                            max={newTargetSessions}
+                            placeholder="Sessions?"
+                        />
+                    </div>
+                    <div className='edit-todo-sessions'>
+                        <label className="todo-label todo-label-sessions" htmlFor={`${props.id}-target-sessions`}>
+                            {(props.lang === 'en') ? 'Target sessions' : props.LANG_MAP['Target sessions']}
+                        </label>
+                        <input
+                            id={`${props.id}-target-sessions`}
+                            className="input input__lg edit-todo-target-sessions"
+                            type="number"
+                            value={newTargetSessions}
+                            onChange={handleChange}
+                            min={newCompletedSessions}
+                            max="57"
+                            placeholder="Sessions?"
+                        />
+                    </div>
                 </fieldset>
 
             </div>
@@ -109,7 +112,7 @@ export default function Todo(props) {
                 />
                 <label className="todo-label" htmlFor={props.id}>
                     <span className="todo-label-name">{props.name}</span>
-                    <span className="todo-label-progress">{(props.targetSessions === 0 | props.targetSessions === "") ? '' : `Progress: ${props.completedSessions ? props.completedSessions : 0}/${props.targetSessions}`}</span>
+                    <span className="todo-label-progress">{(props.targetSessions === 0 | props.targetSessions === "") ? '' : `${(props.lang === 'en') ? 'Progress' : props.LANG_MAP['Progress']}: ${props.completedSessions ? props.completedSessions : 0}/${props.targetSessions}`}</span>
                 </label>
             </div>
             <div className="todo-btn-group">

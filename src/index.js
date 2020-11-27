@@ -24,7 +24,10 @@ const LANG_MAP = {
     Edit: '編輯',
     Delete: '刪除',
     Cancel: '取消',
-    Save: '儲存'
+    Save: '儲存',
+    Progress: '進度',
+    'Target sessions': '目標番茄數',
+    'Completed sessions': '完成番茄數'
 };
 
 function App() {

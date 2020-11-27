@@ -1,5 +1,5 @@
 #todoapp > * {
-  max-width: 36rem;
+  max-width: 32rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -9,10 +9,11 @@ fieldset {
   padding: 0px;
 }
 
-#todoapp > form,
+/* #todoapp > form,
 #todoapp > h1 {
   max-width: 100%;
-}
+} */
+
 .label-wrapper {
   margin: 0;
 }
@@ -27,12 +28,6 @@ fieldset {
   display: flex;
   justify-content: space-between;
   padding: 0px;
-}
-
-#todo-fieldset {
-  margin-bottom: 0.5rem;
-  display: flex;
-  flex-direction: column;
 }
 
 .input__lg {
@@ -100,10 +95,11 @@ ul {
   border: 2px white solid;
   padding: 10px;
   border-radius: 10px;
+  max-width: 32rem;
 }
 
 .todo-list > * + * {
-  margin-top: 1.2rem;
+  margin-top: 0.5rem;
 }
 
 .todo-label {
@@ -141,18 +137,37 @@ ul {
 }
 
 /* editing mode */
+
 .edit-todo-name {
   width: 100%;
 }
 
 .edit-todo-sessions {
-  width: 40%;
+  text-align: initial;
+  width: 47.5%;
+}
+
+.edit-todo-completed-sessions,
+.edit-todo-target-sessions {
+  width: 100%;
+}
+
+.todo-label-sessions {
+  width: 100%;
+}
+
+.todo-fieldset {
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.edit-todo-sessions:nth-of-type(2) {
+  margin-left: 5%;
 }
 
 /* CHECKBOX STYLES */
 .c-cb {
-  /* margin-left: 0.5rem; */
-  /* margin-bottom: 0.5rem; */
   text-align: initial;
   box-sizing: border-box;
   font-weight: 400;
@@ -184,9 +199,7 @@ ul {
   font-size: inherit;
   font-family: inherit;
   line-height: inherit;
-  /* display: inline-block; */
   margin-bottom: 0;
-  /* padding: 6px 8px; */
   margin-left: 6px;
   cursor: pointer;
   touch-action: manipulation;
