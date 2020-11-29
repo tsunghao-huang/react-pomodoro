@@ -23,6 +23,7 @@ const LANG_MAP = {
     Completed: '完成',
     Edit: '編輯',
     Delete: '刪除',
+    Check: '標記完成',
     Cancel: '取消',
     Save: '儲存',
     Progress: '進度',

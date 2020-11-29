@@ -220,7 +220,7 @@ button:hover {
   }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 570px) {
   html {
     font-size: 82%;
   }

@@ -104,16 +104,28 @@ export default function Todo(props) {
     const viewTemplate = (
         <div className="stack-small">
             <div className="c-cb">
-                <input
+                {/* <input
                     id={props.id}
                     type="checkbox"
                     defaultChecked={props.completed}
                     onChange={() => props.toggleTaskCompleted(props.id)}
-                />
-                <label className="todo-label" htmlFor={props.id}>
+                /> */}
+                <button
+                    id={props.id}
+                    type="button"
+                    className="btn check-btn"
+                    onClick={() => props.toggleTaskCompleted(props.id)}
+                >
+                    <i className={`fa ${props.completed ? "fa-check-circle" : "fa-circle-o"}`} aria-hidden="true"></i>
+                    <span className="visually-hidden">
+                        {(props.lang === 'en') ? 'Edit' : props.LANG_MAP['Edit']}
+                        {props.name}
+                    </span>
+                </button>
+                <div className={`todo-label ${props.completed ? "todo-label-checked" : ""}`} htmlFor={props.id}>
                     <span className="todo-label-name">{props.name}</span>
                     <span className="todo-label-progress">{(props.targetSessions === 0 | props.targetSessions === "") ? '' : `${(props.lang === 'en') ? 'Progress' : props.LANG_MAP['Progress']}: ${props.completedSessions ? props.completedSessions : 0}/${props.targetSessions}`}</span>
-                </label>
+                </div>
             </div>
             <div className="todo-btn-group">
                 <button
@@ -122,7 +134,7 @@ export default function Todo(props) {
                     onClick={() => setEditing(true)}
                     ref={editButtonRef}
                 >
-                    <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
+                    <i className="fa fa-pencil" aria-hidden="true"></i>
                     <span className="visually-hidden">
                         {(props.lang === 'en') ? 'Edit' : props.LANG_MAP['Edit']}
                         {props.name}

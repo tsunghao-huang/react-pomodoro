@@ -40,7 +40,6 @@ export default function TodoApp(props) {
             completedSessions: 0,
             targetSessions: (targetSessions === "") ? 0 : parseInt(targetSessions)
         };
-        console.log(newTask);
         setTasks([...tasks, newTask]);
         updateLocalStorage([...tasks, newTask]);
     }
@@ -104,7 +103,6 @@ export default function TodoApp(props) {
                 }
             })
 
-        console.log(editedTaskList);
         setTasks(editedTaskList);
         updateLocalStorage(editedTaskList);
     }
