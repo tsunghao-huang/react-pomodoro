@@ -15,19 +15,19 @@ const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 export default function TodoApp(props) {
 
-    // const localStorageKey = 'localTodo';
-    // if (localStorage.getItem(localStorageKey) === null) {
-    //     localStorage.setItem(localStorageKey, JSON.stringify(props.tasks));
-    // }
-    // const localTodo = JSON.parse(localStorage.getItem(localStorageKey));
-    // const [tasks, setTasks] = useState(localTodo);
+    const localStorageKey = 'localTodo';
+    if (localStorage.getItem(localStorageKey) === null) {
+        localStorage.setItem(localStorageKey, JSON.stringify(props.tasks));
+    }
+    const localTodo = JSON.parse(localStorage.getItem(localStorageKey));
+    const [tasks, setTasks] = useState(localTodo);
 
 
     function updateLocalStorage(updatedTodos) {
+        localStorage.setItem(localStorageKey, JSON.stringify(updatedTodos));
         return;
-        // localStorage.setItem(localStorageKey, JSON.stringify(updatedTodos));
     }
-    const [tasks, setTasks] = useState(props.tasks);
+    // const [tasks, setTasks] = useState(props.tasks);
 
     const [filter, setFilter] = useState('All');
 

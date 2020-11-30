@@ -9,11 +9,6 @@ fieldset {
   padding: 0px;
 }
 
-/* #todoapp > form,
-#todoapp > h1 {
-  max-width: 100%;
-} */
-
 .label-wrapper {
   margin: 0;
 }
@@ -80,8 +75,8 @@ fieldset {
   height: 1px;
   width: 1px;
   overflow: hidden;
-  clip: rect(1px 1px 1px 1px);
-  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: rect(1px 1px 1px 1px);
+  clip-path: rect(1px, 1px, 1px, 1px);
   white-space: nowrap;
 }
 
@@ -112,8 +107,6 @@ ul {
   box-shadow: none;
   color: white;
   font-size: 1.6rem;
-  /* transform: scale(1.2); */
-  /* padding: 0px 6px; */
 }
 
 .check-btn:hover {
@@ -125,8 +118,6 @@ ul {
 }
 
 .todo-label {
-  /* display: block;
-  text-align: left; */
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -147,9 +138,9 @@ ul {
   background-color: initial;
   box-shadow: initial;
   flex: initial;
-  justify-content: left;
   text-shadow: 2px 2px black;
   color: white;
+  width: 2.5rem;
 }
 
 /* .todo-btn-group > * + * {

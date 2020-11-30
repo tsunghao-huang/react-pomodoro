@@ -19,7 +19,7 @@ class ControlPanel extends React.Component {
                         onClick={this.props.handleInDecrement}
                         className='btn-level'
                     >
-                        <i className="fa fa-arrow-down fa-2x" aria-hidden="true"></i>
+                        <i className="fas fa-arrow-down fa-2x" aria-hidden="true"></i>
                     </button>
 
                     <p aria-label={`Custom ${this.props.value}`} aria-live='assertive' id={`${this.props.value.toLowerCase()}-length`} className='btn-level'>{this.props.length}</p>
@@ -30,7 +30,7 @@ class ControlPanel extends React.Component {
                         onClick={this.props.handleInDecrement}
                         className='btn-level'
                     >
-                        <i className="fa fa-arrow-up fa-2x" aria-hidden="true"></i>
+                        <i className="fas fa-arrow-up fa-2x" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>

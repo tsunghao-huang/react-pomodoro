@@ -84,14 +84,14 @@ export default function Todo(props) {
                     className="btn todo-cancel"
                     onClick={() => setEditing(false)}
                 >
-                    <i className="fa fa-times" aria-hidden="true"></i>
+                    <i className="fas fa-times" aria-hidden="true"></i>
                     <span className="visually-hidden">
                         {(props.lang === 'en') ? 'Cancel' : props.LANG_MAP['Cancel']}
                         renaming {props.name}
                     </span>
                 </button>
                 <button type="submit" className="btn btn__primary todo-edit">
-                    <i className="fa fa-floppy-o" aria-hidden="true"></i>
+                    <i className="far fa-save" aria-hidden="true"></i>
 
                     <span className="visually-hidden">
                         {(props.lang === 'en') ? 'Save' : props.LANG_MAP['Save']}
@@ -116,7 +116,7 @@ export default function Todo(props) {
                     className="btn check-btn"
                     onClick={() => props.toggleTaskCompleted(props.id)}
                 >
-                    <i className={`fa ${props.completed ? "fa-check-circle" : "fa-circle-o"}`} aria-hidden="true"></i>
+                    <i className={`${props.completed ? "fas fa-check-circle" : "far fa-circle"}`} aria-hidden="true"></i>
                     <span className="visually-hidden">
                         {(props.lang === 'en') ? 'Edit' : props.LANG_MAP['Edit']}
                         {props.name}
@@ -134,7 +134,7 @@ export default function Todo(props) {
                     onClick={() => setEditing(true)}
                     ref={editButtonRef}
                 >
-                    <i className="fa fa-pencil" aria-hidden="true"></i>
+                    <i className="fas fa-pencil-alt" aria-hidden="true"></i>
                     <span className="visually-hidden">
                         {(props.lang === 'en') ? 'Edit' : props.LANG_MAP['Edit']}
                         {props.name}
@@ -145,7 +145,7 @@ export default function Todo(props) {
                     className="btn btn__danger"
                     onClick={() => props.deleteTask(props.id)}
                 >
-                    <i className="fa fa-trash" aria-hidden="true"></i>
+                    <i className="fas fa-trash-alt" aria-hidden="true"></i>
                     <span className="visually-hidden">
                         {(props.lang === 'en') ? 'Delete' : props.LANG_MAP['Delete']}
                         {props.name}
