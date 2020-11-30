@@ -246,7 +246,6 @@ class Pomodoro extends React.Component {
                 <DisplayPanel
                     timeLeft={this.clockify(this.state.timeLeft)}
                     handleReset={this.handleReset}
-                    handleStartToggle={this.handleStartToggle}
                     currentCounting={this.state.currentCounting}
                     lang={this.props.lang}
                     LANG_MAP={this.props.LANG_MAP}
