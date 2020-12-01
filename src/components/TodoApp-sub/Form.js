@@ -18,6 +18,7 @@ function Form(props) {
         if (name.replace(/\s*/, "") === "") return;
         props.addTask(name, targetSessions);
         setName("");
+        setTargetSessions("");
     }
     return (
         <form onSubmit={handleSubmit}>
