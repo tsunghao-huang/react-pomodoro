@@ -104,14 +104,7 @@ export default function Todo(props) {
     const viewTemplate = (
         <div className="stack-small">
             <div className="c-cb">
-                {/* <input
-                    id={props.id}
-                    type="checkbox"
-                    defaultChecked={props.completed}
-                    onChange={() => props.toggleTaskCompleted(props.id)}
-                /> */}
                 <button
-                    id={props.id}
                     type="button"
                     className="btn check-btn"
                     onClick={() => props.toggleTaskCompleted(props.id)}
@@ -130,6 +123,17 @@ export default function Todo(props) {
             <div className="todo-btn-group">
                 <button
                     type="button"
+                    className="btn btn__danger"
+                    onClick={() => props.deleteTask(props.id)}
+                >
+                    <i className="fas fa-trash-alt" aria-hidden="true"></i>
+                    <span className="visually-hidden">
+                        {(props.lang === 'en') ? 'Delete' : props.LANG_MAP['Delete']}
+                        {props.name}
+                    </span>
+                </button>
+                <button
+                    type="button"
                     className="btn"
                     onClick={() => setEditing(true)}
                     ref={editButtonRef}
@@ -137,17 +141,6 @@ export default function Todo(props) {
                     <i className="fas fa-pencil-alt" aria-hidden="true"></i>
                     <span className="visually-hidden">
                         {(props.lang === 'en') ? 'Edit' : props.LANG_MAP['Edit']}
-                        {props.name}
-                    </span>
-                </button>
-                <button
-                    type="button"
-                    className="btn btn__danger"
-                    onClick={() => props.deleteTask(props.id)}
-                >
-                    <i className="fas fa-trash-alt" aria-hidden="true"></i>
-                    <span className="visually-hidden">
-                        {(props.lang === 'en') ? 'Delete' : props.LANG_MAP['Delete']}
                         {props.name}
                     </span>
                 </button>

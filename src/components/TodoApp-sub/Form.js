@@ -19,6 +19,8 @@ function Form(props) {
         props.addTask(name, targetSessions);
         setName("");
         setTargetSessions("");
+        const newTodoInput = document.getElementById('new-todo-input');
+        newTodoInput.focus();
     }
     return (
         <form onSubmit={handleSubmit}>
@@ -38,6 +40,7 @@ function Form(props) {
                     value={name}
                     onChange={handleChange}
                     required={true}
+                    placeholder={`${(props.lang === 'en') ? 'Todo' : props.LANG_MAP['Todo']}?`}
                 />
                 <input
                     type="number"

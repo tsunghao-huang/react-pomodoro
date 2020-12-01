@@ -16,6 +16,7 @@ const LANG_MAP = {
     Session: '工 作',
     Break: '休 息',
     Todos: '待辦事項',
+    Todo: '待辦事項',
     'What needs to be done?': '有事嗎？',
     Add: '新增',
     All: '全部',

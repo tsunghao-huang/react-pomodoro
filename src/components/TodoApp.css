@@ -129,11 +129,12 @@ ul {
 
 .todo-label-checked {
   text-decoration: line-through;
-  text-decoration-thickness: 5px;
+  text-decoration-thickness: 3px;
 }
 
 .todo-btn-group {
   display: flex;
+  justify-content: end;
 }
 
 .todo-btn-group > * {
@@ -143,7 +144,7 @@ ul {
   flex: initial;
   text-shadow: 2px 2px black;
   color: white;
-  width: 2.5rem;
+  width: 3rem;
   padding-left: 0px;
   padding-right: 0px;
 }
