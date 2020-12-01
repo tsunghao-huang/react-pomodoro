@@ -133,8 +133,7 @@ ul {
 }
 
 .todo-btn-group {
-  display: flex;
-  justify-content: end;
+  text-align: end;
 }
 
 .todo-btn-group > * {
