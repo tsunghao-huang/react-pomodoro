@@ -6,9 +6,9 @@ import Pomodoro from './components/Pomodoro';
 import TodoApp from './components/TodoApp';
 
 const DATA = [
-    { id: "todo-0", name: "Eat", completed: true, completedSessions: 2, targetSessions: 2 },
-    { id: "todo-1", name: "Sleep", completed: false, completedSessions: 0, targetSessions: 0 },
-    { id: "todo-2", name: "Repeat", completed: false, completedSessions: 0, targetSessions: 0 }
+    { id: "todo-0", name: "Eat", completed: true, completedSessions: 2, targetSessions: 2, current: true },
+    { id: "todo-1", name: "Sleep", completed: false, completedSessions: 0, targetSessions: 0, current: false },
+    { id: "todo-2", name: "Repeat", completed: false, completedSessions: 0, targetSessions: 0, current: false }
 ];
 
 const LANG_MAP = {
@@ -35,6 +35,7 @@ const LANG_MAP = {
 function App() {
 
     const [lang, setLang] = useState('en');
+    const [currentTask, setCurrentTask] = useState();
 
     useEffect(() => {
         document.documentElement.setAttribute('lang', lang);
@@ -44,11 +45,24 @@ function App() {
         (lang === 'en') ? setLang('zh-TW') : setLang('en');
     }
 
+    function handleCurrentTask(newCurrentTask) {
+        const allLis = document.querySelectorAll('.todo');
+        [...allLis].map((li) => {
+            if (li.id.includes(newCurrentTask.id)) {
+                return li.classList.add('todo-selected');
+            } else {
+                return li.classList.remove('todo-selected');
+            }
+        })
+        console.log(allLis);
+        setCurrentTask(newCurrentTask.name);
+    }
+
     return (
         <div id="App">
             <button aria-label={`switch language to ${(lang === 'en') ? 'Mandarin' : 'English'}`} id='language-btn' onClick={handleLanguage}>{(lang === 'en') ? '繁體中文' : 'English'}</button>
-            <Pomodoro lang={lang} LANG_MAP={LANG_MAP} />
-            <TodoApp tasks={DATA} lang={lang} LANG_MAP={LANG_MAP} />
+            <Pomodoro lang={lang} LANG_MAP={LANG_MAP} currentTask={currentTask} />
+            <TodoApp tasks={DATA} lang={lang} LANG_MAP={LANG_MAP} handleCurrentTask={handleCurrentTask} />
         </div>
 
     )

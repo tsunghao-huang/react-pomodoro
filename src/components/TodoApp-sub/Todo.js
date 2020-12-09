@@ -13,6 +13,7 @@ export default function Todo(props) {
     const wasEditing = usePrevious(isEditing);
 
     function handleChange(e) {
+        e.stopPropagation();
         if (e.target.id.includes('completed-sessions')) {
             setNewCompletedSessions(e.target.value);
         } else if (e.target.id.includes('target-sessions')) {
@@ -23,14 +24,20 @@ export default function Todo(props) {
     }
 
     function handleSubmit(e) {
+        e.stopPropagation();
         e.preventDefault();
         if (newName.replace(/\s*/, "") === "") return;
         props.editTask(props.id, newName, newCompletedSessions, newTargetSessions);
         setEditing(false);
     }
 
+    function setEditingAndPreventBubbling(e, b) {
+        e.stopPropagation();
+        setEditing(b);
+    }
+
     const editingTemplate = (
-        <form className="stack-small" onSubmit={handleSubmit}>
+        <form className="stack-small">
             <div className="form-group">
                 <fieldset className="todo-fieldset">
                     <label className="todo-label" htmlFor={props.id}>
@@ -82,7 +89,7 @@ export default function Todo(props) {
                 <button
                     type="button"
                     className="btn todo-cancel"
-                    onClick={() => setEditing(false)}
+                    onClick={(e) => setEditingAndPreventBubbling(e, false)}
                 >
                     <i className="fas fa-times" aria-hidden="true"></i>
                     <span className="visually-hidden">
@@ -90,7 +97,11 @@ export default function Todo(props) {
                         renaming {props.name}
                     </span>
                 </button>
-                <button type="submit" className="btn btn__primary todo-edit">
+                <button
+                    type="submit"
+                    className="btn btn__primary todo-edit"
+                    onClick={(e) => handleSubmit(e)}
+                >
                     <i className="far fa-save" aria-hidden="true"></i>
 
                     <span className="visually-hidden">
@@ -107,7 +118,7 @@ export default function Todo(props) {
                 <button
                     type="button"
                     className="btn check-btn"
-                    onClick={() => props.toggleTaskCompleted(props.id)}
+                    onClick={(e) => props.toggleTaskCompleted(e, props.id)}
                 >
                     <i className={`${props.completed ? "fas fa-check-circle" : "far fa-circle"}`} aria-hidden="true"></i>
                     <span className="visually-hidden">
@@ -124,7 +135,7 @@ export default function Todo(props) {
                 <button
                     type="button"
                     className="btn btn__danger"
-                    onClick={() => props.deleteTask(props.id)}
+                    onClick={(e) => props.deleteTask(e, props.id)}
                 >
                     <i className="fas fa-trash-alt" aria-hidden="true"></i>
                     <span className="visually-hidden">
@@ -135,7 +146,7 @@ export default function Todo(props) {
                 <button
                     type="button"
                     className="btn"
-                    onClick={() => setEditing(true)}
+                    onClick={(e) => setEditingAndPreventBubbling(e, true)}
                     ref={editButtonRef}
                 >
                     <i className="fas fa-pencil-alt" aria-hidden="true"></i>
@@ -164,7 +175,11 @@ export default function Todo(props) {
     }, [wasEditing, isEditing, props.name, props.completedSessions, props.targetSessions]);
 
     return (
-        <li className="todo stack-small">
+        <li
+            id={`li-${props.id}`}
+            className="todo stack-small"
+            onClick={() => props.updateCurrentTask(props.id)}
+        >
             {isEditing ? editingTemplate : viewTemplate}
         </li>
     );

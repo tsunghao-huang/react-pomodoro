@@ -5,6 +5,8 @@ class ControlPanel extends React.Component {
         return (
             <div id={`${this.props.value.toLowerCase()}-panel`} className='control-panel'>
                 <button
+                    className='btn toggle-btn'
+                    aria-pressed={this.props.currentCounting === this.props.value}
                     aria-label={`set ${this.props.value.toLowerCase()} to default duration.`}
                     id={`default-${this.props.value.toLowerCase()}`}
                     onClick={this.props.handleDefaultBtn}

@@ -114,6 +114,20 @@ button:hover {
   background-color: #cacaca;
 }
 
+.btn.toggle-btn[aria-pressed="true"] {
+  color: black;
+  text-decoration: underline;
+  background-color: white;
+  border-color: white;
+}
+
+.btn.toggle-btn {
+  color: #cacaca;
+  background-color: initial;
+  box-shadow: initial;
+  border: 2px solid #cacaca;
+}
+
 #control-panels-group {
   display: flex;
   justify-content: space-around;

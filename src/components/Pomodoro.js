@@ -251,6 +251,7 @@ class Pomodoro extends React.Component {
                     LANG_MAP={this.props.LANG_MAP}
                     handleStartToggle={this.handleStartToggle}
                     counting={this.state.counting}
+                    currentTask={this.props.currentTask}
                 />
                 <div id='control-panels-group' className='btn-group'>
                     {controlPanelList}

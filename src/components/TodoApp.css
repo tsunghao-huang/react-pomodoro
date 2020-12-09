@@ -49,7 +49,7 @@ fieldset {
   width: 100%;
 }
 
-.btn.toggle-btn[aria-pressed="true"] {
+/* .btn.toggle-btn[aria-pressed="true"] {
   color: black;
   text-decoration: underline;
   background-color: white;
@@ -61,7 +61,7 @@ fieldset {
   background-color: initial;
   box-shadow: initial;
   border: 2px solid #cacaca;
-}
+} */
 
 #list-heading {
   font-size: 1.5rem;
@@ -93,6 +93,15 @@ ul {
   max-width: 32rem;
 }
 
+.todo:hover {
+  cursor: pointer;
+}
+
+.todo-selected {
+  border-left: 8px solid white;
+  box-shadow: 3px 3px black;
+}
+
 .todo-list > * + * {
   margin-top: 0.5rem;
 }
@@ -114,6 +123,7 @@ ul {
 
 .check-btn:hover {
   background-color: transparent;
+  color: #cacaca;
 }
 
 .check-btn:active {

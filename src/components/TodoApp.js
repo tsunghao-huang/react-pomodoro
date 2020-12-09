@@ -44,7 +44,8 @@ export default function TodoApp(props) {
         updateLocalStorage([...tasks, newTask]);
     }
 
-    function toggleTaskCompleted(id) {
+    function toggleTaskCompleted(e, id) {
+        e.stopPropagation();
         const updatedTasks = tasks
             .map(task => {
                 // if this task has the same ID as the edited task
@@ -69,7 +70,23 @@ export default function TodoApp(props) {
         updateLocalStorage(updatedTasks);
     }
 
-    function deleteTask(id) {
+    function updateCurrentTask(id) {
+        const updatedTasks = tasks.map((task) => {
+            if (id === task.id) {
+                return { ...task, current: true };
+            } else {
+                return { ...task, current: false };
+            }
+        })
+        setTasks(updatedTasks);
+        updateLocalStorage(updatedTasks);
+        const currentTask = updatedTasks.filter(task => task.current)[0]
+        props.handleCurrentTask(currentTask);
+
+    }
+
+    function deleteTask(e, id) {
+        e.stopPropagation();
         const remainingTasks = tasks.filter(task => id !== task.id);
         setTasks(remainingTasks);
         updateLocalStorage(remainingTasks);
@@ -122,6 +139,7 @@ export default function TodoApp(props) {
                 LANG_MAP={props.LANG_MAP}
                 completedSessions={task.completedSessions}
                 targetSessions={task.targetSessions}
+                updateCurrentTask={updateCurrentTask}
             />
         ));
 
