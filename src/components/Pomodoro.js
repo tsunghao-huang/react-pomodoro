@@ -8,7 +8,7 @@ class Pomodoro extends React.Component {
         this.state = {
             breakLength: 5,
             sessionLength: 25,
-            timeLeft: 1500,
+            timeLeft: 10,
             counting: false,
             currentCounting: 'Session',
             english: true
@@ -186,6 +186,11 @@ class Pomodoro extends React.Component {
                 currentCounting: newCurrentCounting,
             });
             this.intervalID = setInterval(() => { this.tick() }, 1000);
+
+            // update currentTask progress
+            if (this.props.currentTask && newCurrentCounting === 'Break') {
+                this.props.updateTaskProgress(this.props.currentTask.id);
+            }
             return;
         };
 

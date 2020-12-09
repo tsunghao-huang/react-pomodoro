@@ -34,8 +34,24 @@ const LANG_MAP = {
 
 function App() {
 
+    const localStorageKey = 'localTodo';
+    if (localStorage.getItem(localStorageKey) === null) {
+        localStorage.setItem(localStorageKey, JSON.stringify(DATA));
+    }
+    const localTodo = JSON.parse(localStorage.getItem(localStorageKey));
+
+    const [tasks, setTasks] = useState(localTodo);
     const [lang, setLang] = useState('en');
     const [currentTask, setCurrentTask] = useState();
+
+    function updateLocalStorage(updatedTodos) {
+        localStorage.setItem(localStorageKey, JSON.stringify(updatedTodos));
+        return;
+    }
+
+    useEffect(() => {
+        updateLocalStorage(tasks);
+    }, [tasks]);
 
     useEffect(() => {
         document.documentElement.setAttribute('lang', lang);
@@ -54,15 +70,52 @@ function App() {
                 return li.classList.remove('todo-selected');
             }
         })
-        console.log(allLis);
-        setCurrentTask(newCurrentTask.name);
+        setCurrentTask(newCurrentTask);
+    }
+
+    function updateTaskProgress(id) {
+        const newTaskList = tasks
+            .map(task => {
+                // if this task has the same ID as the edited task
+                if (id === task.id && task.completedSessions !== task.targetSessions) {
+                    return {
+                        ...task,
+                        ...{
+                            completedSessions: task.completedSessions + 1
+                        }
+                    };
+                }
+                return task;
+            })
+            .map(task => {
+                // validate target & completed sessions
+                if ((task.targetSessions !== 0) && (task.targetSessions === task.completedSessions)) {
+                    return { ...task, completed: true }
+                } else if ((task.targetSessions !== 0) && (task.targetSessions !== task.completedSessions)) {
+                    return { ...task, completed: false }
+                } else {
+                    return task;
+                }
+            })
+        setTasks(newTaskList);
     }
 
     return (
         <div id="App">
             <button aria-label={`switch language to ${(lang === 'en') ? 'Mandarin' : 'English'}`} id='language-btn' onClick={handleLanguage}>{(lang === 'en') ? '繁體中文' : 'English'}</button>
-            <Pomodoro lang={lang} LANG_MAP={LANG_MAP} currentTask={currentTask} />
-            <TodoApp tasks={DATA} lang={lang} LANG_MAP={LANG_MAP} handleCurrentTask={handleCurrentTask} />
+            <Pomodoro
+                lang={lang}
+                LANG_MAP={LANG_MAP}
+                currentTask={currentTask}
+                updateTaskProgress={updateTaskProgress}
+            />
+            <TodoApp
+                tasks={tasks}
+                lang={lang}
+                LANG_MAP={LANG_MAP}
+                handleCurrentTask={handleCurrentTask}
+                setTasks={setTasks}
+            />
         </div>
 
     )

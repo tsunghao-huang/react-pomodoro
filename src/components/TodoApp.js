@@ -15,19 +15,20 @@ const FILTER_NAMES = Object.keys(FILTER_MAP);
 
 export default function TodoApp(props) {
 
-    const localStorageKey = 'localTodo';
-    if (localStorage.getItem(localStorageKey) === null) {
-        localStorage.setItem(localStorageKey, JSON.stringify(props.tasks));
-    }
-    const localTodo = JSON.parse(localStorage.getItem(localStorageKey));
-    const [tasks, setTasks] = useState(localTodo);
+    // const localStorageKey = 'localTodo';
+    // if (localStorage.getItem(localStorageKey) === null) {
+    //     localStorage.setItem(localStorageKey, JSON.stringify(props.tasks));
+    // }
+    // const localTodo = JSON.parse(localStorage.getItem(localStorageKey));
+    // const [tasks, setTasks] = useState(localTodo);
 
 
-    function updateLocalStorage(updatedTodos) {
-        localStorage.setItem(localStorageKey, JSON.stringify(updatedTodos));
-        return;
-    }
+    // function updateLocalStorage(updatedTodos) {
+    //     localStorage.setItem(localStorageKey, JSON.stringify(updatedTodos));
+    //     return;
+    // }
     // const [tasks, setTasks] = useState(props.tasks);
+    const tasks = props.tasks;
 
     const [filter, setFilter] = useState('All');
 
@@ -40,8 +41,7 @@ export default function TodoApp(props) {
             completedSessions: 0,
             targetSessions: (targetSessions === "") ? 0 : parseInt(targetSessions)
         };
-        setTasks([...tasks, newTask]);
-        updateLocalStorage([...tasks, newTask]);
+        props.setTasks([...tasks, newTask]);
     }
 
     function toggleTaskCompleted(e, id) {
@@ -66,8 +66,7 @@ export default function TodoApp(props) {
                 }
                 return task;
             })
-        setTasks(updatedTasks);
-        updateLocalStorage(updatedTasks);
+        props.setTasks(updatedTasks);
     }
 
     function updateCurrentTask(id) {
@@ -78,8 +77,7 @@ export default function TodoApp(props) {
                 return { ...task, current: false };
             }
         })
-        setTasks(updatedTasks);
-        updateLocalStorage(updatedTasks);
+        props.setTasks(updatedTasks);
         const currentTask = updatedTasks.filter(task => task.current)[0]
         props.handleCurrentTask(currentTask);
 
@@ -88,8 +86,7 @@ export default function TodoApp(props) {
     function deleteTask(e, id) {
         e.stopPropagation();
         const remainingTasks = tasks.filter(task => id !== task.id);
-        setTasks(remainingTasks);
-        updateLocalStorage(remainingTasks);
+        props.setTasks(remainingTasks);
     }
 
     function editTask(id, newName, newCompletedSessions, newTargetSessions) {
@@ -120,8 +117,7 @@ export default function TodoApp(props) {
                 }
             })
 
-        setTasks(editedTaskList);
-        updateLocalStorage(editedTaskList);
+        props.setTasks(editedTaskList);
     }
 
     const taskList = tasks
