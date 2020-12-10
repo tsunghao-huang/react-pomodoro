@@ -6,14 +6,14 @@ import Pomodoro from './components/Pomodoro';
 import TodoApp from './components/TodoApp';
 
 const DATA = [
-    { id: "todo-0", name: "Eat", completed: true, completedSessions: 2, targetSessions: 2, current: true },
-    { id: "todo-1", name: "Sleep", completed: false, completedSessions: 0, targetSessions: 0, current: false },
-    { id: "todo-2", name: "Repeat", completed: false, completedSessions: 0, targetSessions: 0, current: false }
+    { id: "todo-0", name: "Eat", completed: true, completedPomodoros: 2, targetPomodoros: 2, current: true },
+    { id: "todo-1", name: "Sleep", completed: false, completedPomodoros: 0, targetPomodoros: 0, current: false },
+    { id: "todo-2", name: "Repeat", completed: false, completedPomodoros: 0, targetPomodoros: 0, current: false }
 ];
 
 const LANG_MAP = {
     'Pomodoro Clock': '蕃 茄 鐘',
-    Session: '工 作',
+    Work: '工 作',
     Break: '休 息',
     Todos: '待辦事項',
     Todo: '待辦事項',
@@ -28,8 +28,8 @@ const LANG_MAP = {
     Cancel: '取消',
     Save: '儲存',
     Progress: '進度',
-    'Target sessions': '目標番茄數',
-    'Completed sessions': '完成番茄數'
+    'Target Pomodoros': '目標番茄數',
+    'Completed Pomodoros': '完成番茄數'
 };
 
 function App() {
@@ -42,7 +42,7 @@ function App() {
 
     const [tasks, setTasks] = useState(localTodo);
     const [lang, setLang] = useState('en');
-    const [currentTask, setCurrentTask] = useState();
+    const [currentTask, setCurrentTask] = useState(tasks.filter(t => t.current)[0]);
 
     function updateLocalStorage(updatedTodos) {
         localStorage.setItem(localStorageKey, JSON.stringify(updatedTodos));
@@ -51,6 +51,7 @@ function App() {
 
     useEffect(() => {
         updateLocalStorage(tasks);
+        setCurrentTask(tasks.filter(t => t.current)[0]);
     }, [tasks]);
 
     useEffect(() => {
@@ -61,27 +62,15 @@ function App() {
         (lang === 'en') ? setLang('zh-TW') : setLang('en');
     }
 
-    function handleCurrentTask(newCurrentTask) {
-        const allLis = document.querySelectorAll('.todo');
-        [...allLis].map((li) => {
-            if (li.id.includes(newCurrentTask.id)) {
-                return li.classList.add('todo-selected');
-            } else {
-                return li.classList.remove('todo-selected');
-            }
-        })
-        setCurrentTask(newCurrentTask);
-    }
-
     function updateTaskProgress(id) {
         const newTaskList = tasks
             .map(task => {
                 // if this task has the same ID as the edited task
-                if (id === task.id && task.completedSessions !== task.targetSessions) {
+                if (id === task.id && task.completedPomodoros !== task.targetPomodoros) {
                     return {
                         ...task,
                         ...{
-                            completedSessions: task.completedSessions + 1
+                            completedPomodoros: task.completedPomodoros + 1
                         }
                     };
                 }
@@ -89,9 +78,9 @@ function App() {
             })
             .map(task => {
                 // validate target & completed sessions
-                if ((task.targetSessions !== 0) && (task.targetSessions === task.completedSessions)) {
+                if ((task.targetPomodoros !== 0) && (task.targetPomodoros === task.completedPomodoros)) {
                     return { ...task, completed: true }
-                } else if ((task.targetSessions !== 0) && (task.targetSessions !== task.completedSessions)) {
+                } else if ((task.targetPomodoros !== 0) && (task.targetPomodoros !== task.completedPomodoros)) {
                     return { ...task, completed: false }
                 } else {
                     return task;
@@ -113,7 +102,6 @@ function App() {
                 tasks={tasks}
                 lang={lang}
                 LANG_MAP={LANG_MAP}
-                handleCurrentTask={handleCurrentTask}
                 setTasks={setTasks}
             />
         </div>

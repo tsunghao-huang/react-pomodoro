@@ -7,10 +7,10 @@ class Pomodoro extends React.Component {
         super(props);
         this.state = {
             breakLength: 5,
-            sessionLength: 25,
-            timeLeft: 10,
+            workLength: 25,
+            timeLeft: 1500,
             counting: false,
-            currentCounting: 'Session',
+            currentCounting: 'Work',
             english: true
         };
         this.handleReset = this.handleReset.bind(this);
@@ -36,10 +36,10 @@ class Pomodoro extends React.Component {
     handleReset() {
         this.setState({
             breakLength: 5,
-            sessionLength: 25,
+            workLength: 25,
             timeLeft: 1500,
             counting: false,
-            currentCounting: 'Session',
+            currentCounting: 'Work',
         });
         // reset should stop the timer as well
         clearInterval(this.intervalID);
@@ -60,12 +60,12 @@ class Pomodoro extends React.Component {
         // ignore click, while the clock is counting
         if (this.state.counting) return;
         // console.log(e.target.id);
-        if (e.target.id.includes('session')) {
+        if (e.target.id.includes('work')) {
             this.setState({
-                sessionLength: 25,
+                workLength: 25,
                 timeLeft: 1500,
                 counting: false,
-                currentCounting: 'Session',
+                currentCounting: 'Work',
             });
         } else {
             this.setState({
@@ -81,7 +81,7 @@ class Pomodoro extends React.Component {
         // in case the clock is still running, disable handleInDecrement()
         if (this.state.counting) return;
         switch (`${e.currentTarget.id},current:${this.state.currentCounting}`) {
-            case 'break-decrement,current:Session':
+            case 'break-decrement,current:Work':
                 if (this.state.breakLength > 1) {
                     this.setState(state => ({
                         breakLength: state.breakLength - 1,
@@ -90,7 +90,7 @@ class Pomodoro extends React.Component {
                 } else {
                     return;
                 }
-            case 'break-increment,current:Session':
+            case 'break-increment,current:Work':
                 if (this.state.breakLength < 60) {
                     this.setState(state => ({
                         breakLength: state.breakLength + 1
@@ -119,39 +119,39 @@ class Pomodoro extends React.Component {
                 } else {
                     return;
                 }
-            case 'session-decrement,current:Session':
-                if (this.state.sessionLength > 1) {
+            case 'work-decrement,current:Work':
+                if (this.state.workLength > 1) {
                     this.setState(state => ({
-                        sessionLength: state.sessionLength - 1,
+                        workLength: state.workLength - 1,
                         timeLeft: state.timeLeft - 60,
                     }));
                     return;
                 } else {
                     return;
                 }
-            case 'session-increment,current:Session':
-                if (this.state.sessionLength < 60) {
+            case 'work-increment,current:Work':
+                if (this.state.workLength < 60) {
                     this.setState(state => ({
-                        sessionLength: state.sessionLength + 1,
+                        workLength: state.workLength + 1,
                         timeLeft: state.timeLeft + 60,
                     }));
                     return;
                 } else {
                     return;
                 }
-            case 'session-decrement,current:Break':
-                if (this.state.sessionLength > 1) {
+            case 'work-decrement,current:Break':
+                if (this.state.workLength > 1) {
                     this.setState(state => ({
-                        sessionLength: state.sessionLength - 1,
+                        workLength: state.workLength - 1,
                     }));
                     return;
                 } else {
                     return;
                 }
-            case 'session-increment,current:Break':
-                if (this.state.sessionLength < 60) {
+            case 'work-increment,current:Break':
+                if (this.state.workLength < 60) {
                     this.setState(state => ({
-                        sessionLength: state.sessionLength + 1,
+                        workLength: state.workLength + 1,
                     }));
                     return;
                 } else {
@@ -177,8 +177,8 @@ class Pomodoro extends React.Component {
             clearInterval(this.intervalID);
             const audio = document.getElementById('beep');
             audio.play();
-            const newCurrentCounting = (this.state.currentCounting === 'Session') ? 'Break' : 'Session';
-            const newTimeLeft = (this.state.currentCounting === 'Session') ? this.state.breakLength * 60 : this.state.sessionLength * 60;
+            const newCurrentCounting = (this.state.currentCounting === 'Work') ? 'Break' : 'Work';
+            const newTimeLeft = (this.state.currentCounting === 'Work') ? this.state.breakLength * 60 : this.state.workLength * 60;
 
             document.getElementById('time-left').style.color = null;
             this.setState({
@@ -233,12 +233,12 @@ class Pomodoro extends React.Component {
 
     render() {
 
-        const controlPanelList = ['Break', 'Session'].map((v) => (
+        const controlPanelList = ['Break', 'Work'].map((v) => (
             <ControlPanel
                 value={v}
                 key={`${v}-panel`}
                 currentCounting={this.state.currentCounting}
-                length={(v === 'Break') ? this.state.breakLength : this.state.sessionLength}
+                length={(v === 'Break') ? this.state.breakLength : this.state.workLength}
                 handleInDecrement={this.handleInDecrement}
                 handleDefaultBtn={this.handleDefaultBtn}
                 lang={this.props.lang}

@@ -32,14 +32,14 @@ export default function TodoApp(props) {
 
     const [filter, setFilter] = useState('All');
 
-    function addTask(name, targetSessions) {
+    function addTask(name, targetPomodoros) {
         const sanitizedName = name.replace(/(^\s*)|(\s*$)/g, "");
         const newTask = {
             id: "todo-" + nanoid(),
             name: sanitizedName,
             completed: false,
-            completedSessions: 0,
-            targetSessions: (targetSessions === "") ? 0 : parseInt(targetSessions)
+            completedPomodoros: 0,
+            targetPomodoros: (targetPomodoros === "") ? 0 : parseInt(targetPomodoros)
         };
         props.setTasks([...tasks, newTask]);
     }
@@ -56,13 +56,13 @@ export default function TodoApp(props) {
                 }
                 return task;
             })
-            .map(task => { // update completedSessions with toggle
+            .map(task => { // update completedPomodoros with toggle
                 if (task.completed) {
-                    return { ...task, completedSessions: parseInt(task.targetSessions) };
-                } else if (task.completedSessions === task.targetSessions) {
-                    // task not completed but have the same completed & target sessions
-                    // reset completedSessions to 0;
-                    return { ...task, completedSessions: 0 };
+                    return { ...task, completedPomodoros: parseInt(task.targetPomodoros) };
+                } else if (task.completedPomodoros === task.targetPomodoros) {
+                    // task not completed but have the same completed & target pomodoros
+                    // reset completedPomodoros to 0;
+                    return { ...task, completedPomodoros: 0 };
                 }
                 return task;
             })
@@ -78,9 +78,6 @@ export default function TodoApp(props) {
             }
         })
         props.setTasks(updatedTasks);
-        const currentTask = updatedTasks.filter(task => task.current)[0]
-        props.handleCurrentTask(currentTask);
-
     }
 
     function deleteTask(e, id) {
@@ -89,7 +86,7 @@ export default function TodoApp(props) {
         props.setTasks(remainingTasks);
     }
 
-    function editTask(id, newName, newCompletedSessions, newTargetSessions) {
+    function editTask(id, newName, newCompletedPomodoros, newTargetPomodoros) {
         const sanitizedNewName = newName.replace(/(^\s*)|(\s*$)/g, "");
         const editedTaskList = tasks
             .map(task => {
@@ -100,17 +97,17 @@ export default function TodoApp(props) {
                         ...task,
                         ...{
                             name: sanitizedNewName,
-                            completedSessions: (newCompletedSessions === "") ? 0 : parseInt(newCompletedSessions),
-                            targetSessions: (newTargetSessions === "") ? 0 : parseInt(newTargetSessions)
+                            completedPomodoros: (newCompletedPomodoros === "") ? 0 : parseInt(newCompletedPomodoros),
+                            targetPomodoros: (newTargetPomodoros === "") ? 0 : parseInt(newTargetPomodoros)
                         }
                     };
                 }
                 return task;
             })
-            .map(task => { // validate target & completed sessions
-                if ((task.targetSessions !== 0) && (task.targetSessions === task.completedSessions)) {
+            .map(task => { // validate target & completed pomodoros
+                if ((task.targetPomodoros !== 0) && (task.targetPomodoros === task.completedPomodoros)) {
                     return { ...task, completed: true }
-                } else if ((task.targetSessions !== 0) && (task.targetSessions !== task.completedSessions)) {
+                } else if ((task.targetPomodoros !== 0) && (task.targetPomodoros !== task.completedPomodoros)) {
                     return { ...task, completed: false }
                 } else {
                     return task;
@@ -133,9 +130,10 @@ export default function TodoApp(props) {
                 editTask={editTask}
                 lang={props.lang}
                 LANG_MAP={props.LANG_MAP}
-                completedSessions={task.completedSessions}
-                targetSessions={task.targetSessions}
+                completedPomodoros={task.completedPomodoros}
+                targetPomodoros={task.targetPomodoros}
                 updateCurrentTask={updateCurrentTask}
+                current={task.current}
             />
         ));
 
