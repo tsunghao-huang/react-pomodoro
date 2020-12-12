@@ -1,10 +1,18 @@
 import React from 'react';
 
 export default function DisplayPanel(props) {
+    const englishHeading = (
+        <p id='pomodoro-heading'>Time to {props.currentCounting} {(props.currentTask) ? `${props.currentCounting === 'Work' ? 'on' : 'from'} ${props.currentTask.name}` : ""}</p>
+    )
+
+    const mandarinHeading = (
+        <p id='pomodoro-heading'>{(props.currentTask) ? `${props.currentTask.name} 的` : ""}{props.LANG_MAP[props.currentCounting].replace(' ', '')}時間</p>
+    )
+
     return (
         <div id='display-panel' aria-label="display panel">
             {/* <p id='timer-label' aria-label={`Currently counting for ${props.currentCounting}`}>{(props.lang === 'en') ? props.currentCounting : props.LANG_MAP[props.currentCounting]}</p> */}
-            <p>Time to {props.currentCounting} {(props.currentTask) ? `${props.currentCounting === 'Work' ? 'on' : 'from'} ${props.currentTask.name}` : ""}</p>
+            {(props.lang === 'en') ? englishHeading : mandarinHeading}
             <p id='time-left' role='timer' aria-label={`Duration for ${props.currentCounting}`}>{props.timeLeft}</p>
 
             <div>

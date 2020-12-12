@@ -98,7 +98,7 @@ ul {
 }
 
 .todo-selected {
-  border-left: 8px solid white;
+  border-left: 10px solid white;
   box-shadow: 3px 3px black;
 }
 
@@ -174,17 +174,17 @@ ul {
   width: 100%;
 }
 
-.edit-todo-sessions {
+.edit-todo-pomodoros {
   text-align: initial;
   width: 49%;
 }
 
-.edit-todo-completed-sessions,
-.edit-todo-target-sessions {
+.edit-todo-completed-pomodoros,
+.edit-todo-target-pomodoros {
   width: 100%;
 }
 
-.todo-label-sessions {
+.todo-label-pomodoros {
   width: 100%;
 }
 
@@ -194,15 +194,15 @@ ul {
   flex-wrap: wrap;
 }
 
-.edit-todo-sessions:nth-of-type(2) {
+.edit-todo-pomodoros:nth-of-type(2) {
   margin-left: 2%;
 }
 
 @media (max-width: 480px) {
-  .edit-todo-sessions {
+  .edit-todo-pomodoros {
     width: 100%;
   }
-  .edit-todo-sessions:nth-of-type(2) {
+  .edit-todo-pomodoros:nth-of-type(2) {
     margin-left: initial;
   }
 }

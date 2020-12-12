@@ -247,7 +247,7 @@ class Pomodoro extends React.Component {
         ));
         return (
             <div id='pomodoro-panel'>
-                <h1>{(this.props.lang === 'en') ? 'Pomodoro Clock' : this.props.LANG_MAP['Pomodoro Clock']}</h1>
+                <h1>{(this.props.lang === 'en') ? 'Pomodoro' : this.props.LANG_MAP['Pomodoro']}</h1>
                 <DisplayPanel
                     timeLeft={this.clockify(this.state.timeLeft)}
                     handleReset={this.handleReset}

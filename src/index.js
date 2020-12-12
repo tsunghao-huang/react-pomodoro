@@ -12,7 +12,7 @@ const DATA = [
 ];
 
 const LANG_MAP = {
-    'Pomodoro Clock': '蕃 茄 鐘',
+    'Pomodoro': '蕃 茄 鐘',
     Work: '工 作',
     Break: '休 息',
     Todos: '待辦事項',
