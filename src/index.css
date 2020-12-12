@@ -3,12 +3,10 @@ body {
   background-color: #155e5c;
   color: white;
   min-height: 100vh;
-  text-align: center;
   touch-action: manipulation; /* disable double click zoom in */
 }
 
 #todoapp {
-  min-width: 36%;
   /* margin: 3rem auto; */
   /* background: #e76c6c; */
   /* margin: 2rem 0 4rem; */
@@ -16,11 +14,13 @@ body {
   padding-top: 0;
   position: relative;
   border-radius: 10px;
+  text-align: center;
   /* box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 2.5rem 5rem 0 rgba(0, 0, 0, 0.1); */
 }
 
 #App {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-evenly;
   /* align-items: center; */
@@ -29,16 +29,21 @@ body {
 #pomodoro-panel {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  min-width: 40%;
+  align-items: center;
+  text-align: center;
 }
 
 #pomodoro-panel,
 #todoapp {
+  min-width: 34%;
   margin-top: 2rem;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  /* padding-left: 3rem;
+  padding-right: 3rem; */
   max-height: 100vh;
+}
+
+#pomodoro-panel > * {
+  max-width: 32rem;
 }
 
 h1 {
@@ -114,22 +119,47 @@ button:hover {
   background-color: #cacaca;
 }
 
+.btn.toggle-btn[aria-pressed="true"] {
+  color: white;
+  /* text-decoration: underline; */
+  background-color: rgba(192, 192, 192, 0.36);
+
+  /* border-color: white; */
+}
+
+.btn.toggle-btn {
+  color: white;
+  background-color: initial;
+  box-shadow: initial;
+  /* border: 2px solid #cacaca; */
+}
+
 #control-panels-group {
   display: flex;
   justify-content: space-around;
+  width: 100%;
 }
 
 #display-panel {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  border: solid 5px white;
-  min-width: 28vmax;
-  min-height: 28vmax;
-  border-radius: 50%;
+  border: white solid 3px;
+  /* min-width: 28vmax;
+  min-height: 20vmax; */
+  border-radius: 30px;
   margin: 2rem auto;
   margin-top: 1em;
   text-align: center;
+  width: 22rem;
+  padding: 1rem 2rem;
+  box-shadow: 5px 5px black;
+}
+
+#pomodoro-heading {
+  font-size: 1.8rem;
+  margin: 0;
+  font-family: "Oswald", sans-serif;
 }
 
 #timer-label {
@@ -140,12 +170,11 @@ button:hover {
 
 #time-left {
   font-size: 7vmax;
-  margin-top: 0;
-  margin-bottom: 0.26em;
+  margin: 2rem auto;
 }
 
 #break-length,
-#session-length {
+#work-length {
   width: 3rem;
   margin-top: 0;
   margin-bottom: 0;
@@ -156,7 +185,7 @@ button:hover {
 }
 
 /* #break-label,
-#session-label {
+#work-label {
   font-family: "Lalezar", cursive;
   font-size: 1.5rem;
   margin-top: 0.5rem;
@@ -164,7 +193,7 @@ button:hover {
 } */
 
 #default-break,
-#default-session {
+#default-work {
   width: 9rem;
   font-size: 1.5rem;
   /* color: #155e5c; */
@@ -186,10 +215,10 @@ button:hover {
 }
 
 @media (max-width: 967px) {
-  #display-panel {
+  /* #display-panel {
     width: 40vmax;
-    height: 40vmax;
-  }
+    height: 28vmax;
+  } */
 
   h1 {
     font-size: 9.5vmin;
@@ -214,7 +243,8 @@ button:hover {
     height: 100vh;
     justify-content: center;
   }
-  #todoapp {
+  #todoapp,
+  #pomodoro-panel {
     min-width: 60%;
     margin-top: 2rem;
   }
@@ -224,10 +254,9 @@ button:hover {
   html {
     font-size: 82%;
   }
-  #display-panel {
-    width: 70vmin;
-    height: 70vmin;
-  }
+  /* #display-panel {
+    width: 60%;
+  } */
 
   #todoapp {
     min-height: 80vh;

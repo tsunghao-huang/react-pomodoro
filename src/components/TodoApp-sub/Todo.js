@@ -8,29 +8,36 @@ export default function Todo(props) {
 
     const [isEditing, setEditing] = useState(false);
     const [newName, setNewName] = useState(props.name);
-    const [newTargetSessions, setNewTargetSessions] = useState(props.targetSessions);
-    const [newCompletedSessions, setNewCompletedSessions] = useState(props.completedSessions);
+    const [newTargetPomodoros, setNewTargetPomodoros] = useState(props.targetPomodoros);
+    const [newCompletedPomodoros, setNewCompletedPomodoros] = useState(props.completedPomodoros);
     const wasEditing = usePrevious(isEditing);
 
     function handleChange(e) {
-        if (e.target.id.includes('completed-sessions')) {
-            setNewCompletedSessions(e.target.value);
-        } else if (e.target.id.includes('target-sessions')) {
-            setNewTargetSessions(e.target.value);
+        e.stopPropagation();
+        if (e.target.id.includes('completed-pomodoros')) {
+            setNewCompletedPomodoros(e.target.value);
+        } else if (e.target.id.includes('target-pomodoros')) {
+            setNewTargetPomodoros(e.target.value);
         } else {
             setNewName(e.target.value);
         }
     }
 
     function handleSubmit(e) {
+        e.stopPropagation();
         e.preventDefault();
         if (newName.replace(/\s*/, "") === "") return;
-        props.editTask(props.id, newName, newCompletedSessions, newTargetSessions);
+        props.editTask(props.id, newName, newCompletedPomodoros, newTargetPomodoros);
         setEditing(false);
     }
 
+    function setEditingAndPreventBubbling(e, b) {
+        e.stopPropagation();
+        setEditing(b);
+    }
+
     const editingTemplate = (
-        <form className="stack-small" onSubmit={handleSubmit}>
+        <form className="stack-small">
             <div className="form-group">
                 <fieldset className="todo-fieldset">
                     <label className="todo-label" htmlFor={props.id}>
@@ -45,34 +52,34 @@ export default function Todo(props) {
                         ref={editFieldRef}
                         required={true}
                     />
-                    <div className='edit-todo-sessions'>
-                        <label className="todo-label todo-label-sessions" htmlFor={`${props.id}-completed-sessions`}>
-                            {(props.lang === 'en') ? 'Completed sessions' : props.LANG_MAP['Completed sessions']}
+                    <div className='edit-todo-pomodoros'>
+                        <label className="todo-label todo-label-pomodoros" htmlFor={`${props.id}-completed-pomodoros`}>
+                            {(props.lang === 'en') ? 'Completed Pomodoros' : props.LANG_MAP['Completed Pomodoros']}
                         </label>
                         <input
-                            id={`${props.id}-completed-sessions`}
-                            className="input input__lg edit-todo-completed-sessions"
+                            id={`${props.id}-completed-pomodoros`}
+                            className="input input__lg edit-todo-completed-pomodoros"
                             type="number"
-                            value={newCompletedSessions}
+                            value={newCompletedPomodoros}
                             onChange={handleChange}
                             min="0"
-                            max={newTargetSessions}
-                            placeholder="Sessions?"
+                            max={newTargetPomodoros}
+                            placeholder="Pomodoros?"
                         />
                     </div>
-                    <div className='edit-todo-sessions'>
-                        <label className="todo-label todo-label-sessions" htmlFor={`${props.id}-target-sessions`}>
-                            {(props.lang === 'en') ? 'Target sessions' : props.LANG_MAP['Target sessions']}
+                    <div className='edit-todo-pomodoros'>
+                        <label className="todo-label todo-label-pomodoros" htmlFor={`${props.id}-target-pomodoros`}>
+                            {(props.lang === 'en') ? 'Target Pomodoros' : props.LANG_MAP['Target Pomodoros']}
                         </label>
                         <input
-                            id={`${props.id}-target-sessions`}
-                            className="input input__lg edit-todo-target-sessions"
+                            id={`${props.id}-target-pomodoros`}
+                            className="input input__lg edit-todo-target-pomodoros"
                             type="number"
-                            value={newTargetSessions}
+                            value={newTargetPomodoros}
                             onChange={handleChange}
-                            min={newCompletedSessions}
+                            min={newCompletedPomodoros}
                             max="57"
-                            placeholder="Sessions?"
+                            placeholder="Pomodoros?"
                         />
                     </div>
                 </fieldset>
@@ -82,7 +89,7 @@ export default function Todo(props) {
                 <button
                     type="button"
                     className="btn todo-cancel"
-                    onClick={() => setEditing(false)}
+                    onClick={(e) => setEditingAndPreventBubbling(e, false)}
                 >
                     <i className="fas fa-times" aria-hidden="true"></i>
                     <span className="visually-hidden">
@@ -90,7 +97,11 @@ export default function Todo(props) {
                         renaming {props.name}
                     </span>
                 </button>
-                <button type="submit" className="btn btn__primary todo-edit">
+                <button
+                    type="submit"
+                    className="btn btn__primary todo-edit"
+                    onClick={(e) => handleSubmit(e)}
+                >
                     <i className="far fa-save" aria-hidden="true"></i>
 
                     <span className="visually-hidden">
@@ -107,7 +118,7 @@ export default function Todo(props) {
                 <button
                     type="button"
                     className="btn check-btn"
-                    onClick={() => props.toggleTaskCompleted(props.id)}
+                    onClick={(e) => props.toggleTaskCompleted(e, props.id)}
                 >
                     <i className={`${props.completed ? "fas fa-check-circle" : "far fa-circle"}`} aria-hidden="true"></i>
                     <span className="visually-hidden">
@@ -117,14 +128,14 @@ export default function Todo(props) {
                 </button>
                 <div className={`todo-label ${props.completed ? "todo-label-checked" : ""}`} htmlFor={props.id}>
                     <span className="todo-label-name">{props.name}</span>
-                    <span className="todo-label-progress">{(props.targetSessions === 0 | props.targetSessions === "") ? '' : `${(props.lang === 'en') ? 'Progress' : props.LANG_MAP['Progress']}: ${props.completedSessions ? props.completedSessions : 0}/${props.targetSessions}`}</span>
+                    <span className="todo-label-progress">{(props.targetPomodoros === 0 | props.targetPomodoros === "") ? '' : `${(props.lang === 'en') ? 'Progress' : props.LANG_MAP['Progress']}: ${props.completedPomodoros ? props.completedPomodoros : 0}/${props.targetPomodoros}`}</span>
                 </div>
             </div>
             <div className="todo-btn-group">
                 <button
                     type="button"
                     className="btn btn__danger"
-                    onClick={() => props.deleteTask(props.id)}
+                    onClick={(e) => props.deleteTask(e, props.id)}
                 >
                     <i className="fas fa-trash-alt" aria-hidden="true"></i>
                     <span className="visually-hidden">
@@ -135,7 +146,7 @@ export default function Todo(props) {
                 <button
                     type="button"
                     className="btn"
-                    onClick={() => setEditing(true)}
+                    onClick={(e) => setEditingAndPreventBubbling(e, true)}
                     ref={editButtonRef}
                 >
                     <i className="fas fa-pencil-alt" aria-hidden="true"></i>
@@ -154,17 +165,21 @@ export default function Todo(props) {
             editFieldRef.current.focus();
             // initiated value for the input field
             setNewName(props.name);
-            setNewCompletedSessions(props.completedSessions);
-            setNewTargetSessions(props.targetSessions);
+            setNewCompletedPomodoros(props.completedPomodoros);
+            setNewTargetPomodoros(props.targetPomodoros);
         }
         if (wasEditing && !isEditing) {
             editButtonRef.current.focus();
         }
 
-    }, [wasEditing, isEditing, props.name, props.completedSessions, props.targetSessions]);
+    }, [wasEditing, isEditing, props.name, props.completedPomodoros, props.targetPomodoros]);
 
     return (
-        <li className="todo stack-small">
+        <li
+            id={`li-${props.id}`}
+            className={`todo stack-small ${props.current ? "todo-selected" : ""}`}
+            onClick={() => props.updateCurrentTask(props.id)}
+        >
             {isEditing ? editingTemplate : viewTemplate}
         </li>
     );

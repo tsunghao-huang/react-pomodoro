@@ -7,7 +7,7 @@ function Form(props) {
     function handleChange(e) {
         if (e.target.id === 'new-todo-input') {
             setName(e.target.value);
-        } else if (e.target.id === 'new-todo-target-session') {
+        } else if (e.target.id === 'new-todo-target-pomodoro') {
             setTargetSessions(e.target.value);
         }
 
@@ -44,13 +44,13 @@ function Form(props) {
                 />
                 <input
                     type="number"
-                    id="new-todo-target-session"
+                    id="new-todo-target-pomodoro"
                     className="input input__lg"
                     value={targetSessions}
                     onChange={handleChange}
                     min="0"
                     max="57"
-                    placeholder={`${(props.lang === 'en') ? 'Target sessions' : props.LANG_MAP['Target sessions']}?`}
+                    placeholder={`${(props.lang === 'en') ? 'Target Pomodoros' : props.LANG_MAP['Target Pomodoros']}?`}
                 />
             </fieldset>
 
