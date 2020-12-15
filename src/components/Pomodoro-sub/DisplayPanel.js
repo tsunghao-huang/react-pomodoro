@@ -15,7 +15,7 @@ export default function DisplayPanel(props) {
             {(props.lang === 'en') ? englishHeading : mandarinHeading}
             <p id='time-left' role='timer' aria-label={`Duration for ${props.currentCounting}`}>{props.timeLeft}</p>
 
-            <div>
+            <div id='display-btn-group'>
                 <button
                     aria-label={`start ${props.currentCounting}`} id="start_stop" onClick={props.handleStartToggle} className='btn-level'>
                     <i className={`fas ${props.counting ? "fa-pause" : "fa-play"} fa-3x`}></i>
