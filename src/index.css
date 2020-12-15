@@ -127,6 +127,10 @@ button:hover {
   /* border-color: white; */
 }
 
+#display-panel {
+  margin-bottom: 1rem;
+}
+
 .btn.toggle-btn {
   color: white;
   background-color: initial;
@@ -134,13 +138,13 @@ button:hover {
   /* border: 2px solid #cacaca; */
 }
 
-#control-panels-group {
+#defaultBtns-group {
   display: flex;
   justify-content: space-around;
   width: 100%;
 }
 
-#display-panel {
+#panels-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -164,13 +168,13 @@ button:hover {
 
 #timer-label {
   font-family: "Oswald", sans-serif;
-  font-size: 4vmax;
+  font-size: 4rem;
   margin: 0 0;
 }
 
 #time-left {
-  font-size: 7vmax;
-  margin: 2rem auto;
+  font-size: 6rem;
+  margin: 1rem auto;
 }
 
 #break-length,
@@ -214,6 +218,87 @@ button:hover {
   margin-left: 0.5rem;
 }
 
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+
+#set-timer-btn {
+  background-color: initial;
+  box-shadow: initial;
+  color: white;
+  text-shadow: 2px 2px black;
+}
+#set-timer-btn:hover {
+  color: #cacaca;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: white;
+  margin: 25vh auto;
+  padding: 10px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 30rem;
+  color: #155e5c;
+}
+
+#timer-form > fieldset {
+  /* display: flex;
+  justify-content: center; */
+  margin: 1rem auto;
+}
+
+#timer-form > fieldset > label {
+  font-size: 1.2rem;
+  display: inline-block;
+  width: 3.6rem;
+}
+
+#new-work-length,
+#new-break-length {
+  font-family: "Oswald", sans-serif;
+  background-color: transparent;
+  padding: 0.5rem;
+  padding-top: 0.2rem;
+  border: 3px solid #155e5c;
+  display: inline-block;
+  width: 50%;
+  box-sizing: border-box;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  color: #155e5c;
+  caret-color: #155e5c;
+  margin-left: 0.5rem;
+}
+
+#new-work-length:focus,
+#new-break-length:focus,
+#timer-form-btn-group > *:focus {
+  outline: 3px dashed #155e5c;
+  outline-offset: 0;
+}
+
+#timer-form-btn-group {
+  text-align: right;
+}
+
+.timer-form-btns {
+  box-shadow: initial;
+  color: #155e5c;
+}
+
 @media (max-width: 967px) {
   /* #display-panel {
     width: 40vmax;
@@ -254,9 +339,6 @@ button:hover {
   html {
     font-size: 82%;
   }
-  /* #display-panel {
-    width: 60%;
-  } */
 
   #todoapp {
     min-height: 80vh;
@@ -276,6 +358,11 @@ button:hover {
   html {
     font-size: 80%;
   }
+
+  #panels-wrapper {
+    max-width: 20rem;
+  }
+
   .filters > * + * {
     margin-left: 0.1rem;
   }

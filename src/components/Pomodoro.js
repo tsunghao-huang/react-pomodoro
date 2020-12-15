@@ -1,6 +1,7 @@
 import React from 'react';
-import ControlPanel from './Pomodoro-sub/ControlPanel';
+import DefaultBtn from './Pomodoro-sub/DefaultBtn';
 import DisplayPanel from './Pomodoro-sub/DisplayPanel';
+import TimerForm from './Pomodoro-sub/TimerForm';
 
 class Pomodoro extends React.Component {
     constructor(props) {
@@ -20,6 +21,7 @@ class Pomodoro extends React.Component {
         this.handleInDecrement = this.handleInDecrement.bind(this);
         this.handleDefaultBtn = this.handleDefaultBtn.bind(this);
         this.handleLanguage = this.handleLanguage.bind(this);
+        this.handleTimerFormSubmit = this.handleTimerFormSubmit.bind(this);
     }
 
     handleLanguage() {
@@ -62,15 +64,15 @@ class Pomodoro extends React.Component {
         // console.log(e.target.id);
         if (e.target.id.includes('work')) {
             this.setState({
-                workLength: 25,
-                timeLeft: 1500,
+                // workLength: 25,
+                timeLeft: this.state.workLength * 60,
                 counting: false,
                 currentCounting: 'Work',
             });
         } else {
             this.setState({
-                breakLength: 5,
-                timeLeft: 300,
+                // breakLength: 5,
+                timeLeft: this.state.breakLength * 60,
                 counting: false,
                 currentCounting: 'Break',
             });
@@ -231,10 +233,19 @@ class Pomodoro extends React.Component {
         return minutes + ':' + seconds
     }
 
+    handleTimerFormSubmit(newBreakLength, newWorkLength) {
+        this.setState({
+            breakLength: parseInt(newBreakLength),
+            workLength: parseInt(newWorkLength),
+            timeLeft: parseInt(newWorkLength) * 60,
+            currentCounting: "Work"
+        });
+    }
+
     render() {
 
-        const controlPanelList = ['Break', 'Work'].map((v) => (
-            <ControlPanel
+        const defaultBtnLists = ['Break', 'Work'].map((v) => (
+            <DefaultBtn
                 value={v}
                 key={`${v}-panel`}
                 currentCounting={this.state.currentCounting}
@@ -248,18 +259,28 @@ class Pomodoro extends React.Component {
         return (
             <div id='pomodoro-panel'>
                 <h1>{(this.props.lang === 'en') ? 'Pomodoro' : this.props.LANG_MAP['Pomodoro']}</h1>
-                <DisplayPanel
-                    timeLeft={this.clockify(this.state.timeLeft)}
-                    handleReset={this.handleReset}
-                    currentCounting={this.state.currentCounting}
-                    lang={this.props.lang}
-                    LANG_MAP={this.props.LANG_MAP}
-                    handleStartToggle={this.handleStartToggle}
-                    counting={this.state.counting}
-                    currentTask={this.props.currentTask}
-                />
-                <div id='control-panels-group' className='btn-group'>
-                    {controlPanelList}
+                <div id='panels-wrapper'>
+
+                    <DisplayPanel
+                        timeLeft={this.clockify(this.state.timeLeft)}
+                        handleReset={this.handleReset}
+                        currentCounting={this.state.currentCounting}
+                        lang={this.props.lang}
+                        LANG_MAP={this.props.LANG_MAP}
+                        handleStartToggle={this.handleStartToggle}
+                        counting={this.state.counting}
+                        currentTask={this.props.currentTask}
+                    />
+                    <div id='defaultBtns-group' className='btn-group'>
+                        {defaultBtnLists}
+                        <TimerForm
+                            breakLength={this.state.breakLength}
+                            workLength={this.state.workLength}
+                            handleTimerFormSubmit={this.handleTimerFormSubmit}
+                            counting={this.state.counting}
+                        />
+                    </div>
+
                 </div>
                 <audio id="beep" preload="auto" src="https://raw.githubusercontent.com/tsunghao-huang/react-pomodoro/gh-pages/homeland.mp3"></audio>
             </div>
