@@ -6,7 +6,7 @@ import Pomodoro from './components/Pomodoro';
 import TodoApp from './components/TodoApp';
 
 const DATA = [
-    { id: "todo-0", name: "Eat", completed: true, completedPomodoros: 2, targetPomodoros: 2, current: true },
+    { id: "todo-0", name: "Eat", completed: false, completedPomodoros: 1, targetPomodoros: 2, current: true },
     { id: "todo-1", name: "Sleep", completed: false, completedPomodoros: 0, targetPomodoros: 0, current: false },
     { id: "todo-2", name: "Repeat", completed: false, completedPomodoros: 0, targetPomodoros: 0, current: false }
 ];
@@ -29,7 +29,9 @@ const LANG_MAP = {
     Save: '儲存',
     Progress: '進度',
     'Target Pomodoros': '目標番茄數',
-    'Completed Pomodoros': '完成番茄數'
+    'Completed Pomodoros': '完成番茄數',
+    'Pomodoros': '番茄數',
+    'Add a task': ' 做點事吧'
 };
 
 function App() {

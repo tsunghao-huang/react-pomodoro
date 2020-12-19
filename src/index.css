@@ -20,7 +20,6 @@ body {
 
 #App {
   display: flex;
-  flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-evenly;
   /* align-items: center; */
@@ -35,7 +34,7 @@ body {
 
 #pomodoro-panel,
 #todoapp {
-  min-width: 34%;
+  min-width: 30rem;
   margin-top: 2rem;
   /* padding-left: 3rem;
   padding-right: 3rem; */
@@ -131,6 +130,24 @@ button:hover {
   margin-bottom: 1rem;
 }
 
+.progress {
+  flex: 10;
+  position: relative;
+  display: flex;
+  flex-basis: 100%;
+  height: 2px;
+  transition: height 0.3s;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.progress__filled {
+  width: 50%;
+  background: white;
+  flex: 0;
+  /* change to start with 0% */
+  flex-basis: 100%;
+}
+
 .btn.toggle-btn {
   color: white;
   background-color: initial;
@@ -152,14 +169,13 @@ button:hover {
   box-shadow: 5px 5px black; */
   background-color: rgba(192, 192, 192, 0.205);
   border-radius: 30px;
-  margin: 2rem auto;
-  margin-top: 1em;
+  margin: 1rem auto;
   text-align: center;
   width: 26rem;
   padding: 1rem 2rem;
 }
 
-#pomodoro-heading {
+#pomodoro-heading > * {
   font-size: 1.8rem;
   margin: 0;
   font-family: "Oswald", sans-serif;
@@ -329,7 +345,6 @@ button:hover {
   }
   #todoapp,
   #pomodoro-panel {
-    min-width: 60%;
     margin-top: 2rem;
   }
 }
@@ -346,7 +361,6 @@ button:hover {
 
   #panels-wrapper {
     width: 20rem;
-    max-width: 70%;
   }
 
   #time-left {

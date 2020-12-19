@@ -7,9 +7,9 @@ import { nanoid } from "nanoid";
 import usePrevious from "./TodoApp-sub/utils";
 
 const FILTER_MAP = {
-    All: () => true,
     Active: task => !task.completed,
-    Completed: task => task.completed
+    Completed: task => task.completed,
+    All: () => true
 };
 const FILTER_NAMES = Object.keys(FILTER_MAP);
 
@@ -30,7 +30,7 @@ export default function TodoApp(props) {
     // const [tasks, setTasks] = useState(props.tasks);
     const tasks = props.tasks;
 
-    const [filter, setFilter] = useState('All');
+    const [filter, setFilter] = useState('Active');
 
     function addTask(name, targetPomodoros) {
         const sanitizedName = name.replace(/(^\s*)|(\s*$)/g, "");

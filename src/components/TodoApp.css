@@ -1,7 +1,39 @@
 #todoapp > * {
-  max-width: 32rem;
+  max-width: 30rem;
   margin-left: auto;
   margin-right: auto;
+}
+
+#add-todo-toggle-btn {
+  background-color: rgba(66, 66, 66, 0.36);
+  box-shadow: initial;
+  border-radius: 10px;
+  color: white;
+  width: 100%;
+  padding: 6px 0;
+}
+
+#add-todo-form {
+  border: 2px dashed rgba(182, 182, 182, 0.459);
+  margin: 1rem auto;
+  border-radius: 10px;
+  width: 100%;
+}
+
+#add-todo-form-edit {
+  border: 2px solid rgba(182, 182, 182, 0.459);
+  border-radius: 10px;
+  margin: 1rem auto;
+  width: 100%;
+  transition: 1s;
+}
+
+#form-btn-group {
+  text-align: right;
+}
+
+#form-btn-group > * {
+  font-size: 2rem;
 }
 
 fieldset {
@@ -9,9 +41,9 @@ fieldset {
   padding: 0px;
 }
 
-.label-wrapper {
+/* .label-wrapper {
   margin: 0;
-}
+} */
 .label__lg {
   font-size: 1.5rem;
   display: block;
@@ -21,8 +53,9 @@ fieldset {
 #new-todo-fieldset {
   border: none;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   padding: 0px;
+  margin-top: 1rem;
 }
 
 .input__lg {
@@ -32,7 +65,7 @@ fieldset {
   padding-top: 0.2rem;
   border: 2px solid white;
   display: inline-block;
-  width: 49%;
+  width: 47%;
   box-sizing: border-box;
   border-radius: 10px;
   font-size: 1.5rem;

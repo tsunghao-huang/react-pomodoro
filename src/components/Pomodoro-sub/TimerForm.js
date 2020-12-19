@@ -95,7 +95,7 @@ export default function TimerForm(props) {
                                 value={newBreakLength}
                                 onChange={handleChange}
                                 ref={editBreakLegnthRef}
-                                required="true"
+                                required={true}
                             />
                         </fieldset>
                         <fieldset>
@@ -107,7 +107,7 @@ export default function TimerForm(props) {
                                 max="60"
                                 value={newWorkLength}
                                 onChange={handleChange}
-                                required="true"
+                                required={true}
                             />
                         </fieldset>
 
