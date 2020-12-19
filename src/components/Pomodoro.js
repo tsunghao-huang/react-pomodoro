@@ -18,7 +18,7 @@ class Pomodoro extends React.Component {
         this.clockify = this.clockify.bind(this);
         this.handleStartToggle = this.handleStartToggle.bind(this);
         this.tick = this.tick.bind(this);
-        this.handleInDecrement = this.handleInDecrement.bind(this);
+        // this.handleInDecrement = this.handleInDecrement.bind(this);
         this.handleDefaultBtn = this.handleDefaultBtn.bind(this);
         this.handleLanguage = this.handleLanguage.bind(this);
         this.handleTimerFormSubmit = this.handleTimerFormSubmit.bind(this);
@@ -79,92 +79,92 @@ class Pomodoro extends React.Component {
         }
     }
 
-    handleInDecrement(e) {
-        // in case the clock is still running, disable handleInDecrement()
-        if (this.state.counting) return;
-        switch (`${e.currentTarget.id},current:${this.state.currentCounting}`) {
-            case 'break-decrement,current:Work':
-                if (this.state.breakLength > 1) {
-                    this.setState(state => ({
-                        breakLength: state.breakLength - 1,
-                    }));
-                    return;
-                } else {
-                    return;
-                }
-            case 'break-increment,current:Work':
-                if (this.state.breakLength < 60) {
-                    this.setState(state => ({
-                        breakLength: state.breakLength + 1
-                    }));
-                    return;
-                } else {
-                    return;
-                }
-            case 'break-decrement,current:Break':
-                if (this.state.breakLength > 1) {
-                    this.setState(state => ({
-                        breakLength: state.breakLength - 1,
-                        timeLeft: state.timeLeft - 60,
-                    }));
-                    return;
-                } else {
-                    return;
-                }
-            case 'break-increment,current:Break':
-                if (this.state.breakLength < 60) {
-                    this.setState(state => ({
-                        breakLength: state.breakLength + 1,
-                        timeLeft: state.timeLeft + 60,
-                    }));
-                    return;
-                } else {
-                    return;
-                }
-            case 'work-decrement,current:Work':
-                if (this.state.workLength > 1) {
-                    this.setState(state => ({
-                        workLength: state.workLength - 1,
-                        timeLeft: state.timeLeft - 60,
-                    }));
-                    return;
-                } else {
-                    return;
-                }
-            case 'work-increment,current:Work':
-                if (this.state.workLength < 60) {
-                    this.setState(state => ({
-                        workLength: state.workLength + 1,
-                        timeLeft: state.timeLeft + 60,
-                    }));
-                    return;
-                } else {
-                    return;
-                }
-            case 'work-decrement,current:Break':
-                if (this.state.workLength > 1) {
-                    this.setState(state => ({
-                        workLength: state.workLength - 1,
-                    }));
-                    return;
-                } else {
-                    return;
-                }
-            case 'work-increment,current:Break':
-                if (this.state.workLength < 60) {
-                    this.setState(state => ({
-                        workLength: state.workLength + 1,
-                    }));
-                    return;
-                } else {
-                    return;
-                }
-            default:
-                return;
+    // handleInDecrement(e) {
+    //     // in case the clock is still running, disable handleInDecrement()
+    //     if (this.state.counting) return;
+    //     switch (`${e.currentTarget.id},current:${this.state.currentCounting}`) {
+    //         case 'break-decrement,current:Work':
+    //             if (this.state.breakLength > 1) {
+    //                 this.setState(state => ({
+    //                     breakLength: state.breakLength - 1,
+    //                 }));
+    //                 return;
+    //             } else {
+    //                 return;
+    //             }
+    //         case 'break-increment,current:Work':
+    //             if (this.state.breakLength < 60) {
+    //                 this.setState(state => ({
+    //                     breakLength: state.breakLength + 1
+    //                 }));
+    //                 return;
+    //             } else {
+    //                 return;
+    //             }
+    //         case 'break-decrement,current:Break':
+    //             if (this.state.breakLength > 1) {
+    //                 this.setState(state => ({
+    //                     breakLength: state.breakLength - 1,
+    //                     timeLeft: state.timeLeft - 60,
+    //                 }));
+    //                 return;
+    //             } else {
+    //                 return;
+    //             }
+    //         case 'break-increment,current:Break':
+    //             if (this.state.breakLength < 60) {
+    //                 this.setState(state => ({
+    //                     breakLength: state.breakLength + 1,
+    //                     timeLeft: state.timeLeft + 60,
+    //                 }));
+    //                 return;
+    //             } else {
+    //                 return;
+    //             }
+    //         case 'work-decrement,current:Work':
+    //             if (this.state.workLength > 1) {
+    //                 this.setState(state => ({
+    //                     workLength: state.workLength - 1,
+    //                     timeLeft: state.timeLeft - 60,
+    //                 }));
+    //                 return;
+    //             } else {
+    //                 return;
+    //             }
+    //         case 'work-increment,current:Work':
+    //             if (this.state.workLength < 60) {
+    //                 this.setState(state => ({
+    //                     workLength: state.workLength + 1,
+    //                     timeLeft: state.timeLeft + 60,
+    //                 }));
+    //                 return;
+    //             } else {
+    //                 return;
+    //             }
+    //         case 'work-decrement,current:Break':
+    //             if (this.state.workLength > 1) {
+    //                 this.setState(state => ({
+    //                     workLength: state.workLength - 1,
+    //                 }));
+    //                 return;
+    //             } else {
+    //                 return;
+    //             }
+    //         case 'work-increment,current:Break':
+    //             if (this.state.workLength < 60) {
+    //                 this.setState(state => ({
+    //                     workLength: state.workLength + 1,
+    //                 }));
+    //                 return;
+    //             } else {
+    //                 return;
+    //             }
+    //         default:
+    //             return;
 
-        }
+    //     }
 
-    }
+    // }
 
     tick() {
 
@@ -262,7 +262,7 @@ class Pomodoro extends React.Component {
                 <div id='panels-wrapper'>
 
                     <DisplayPanel
-                        timeLeft={this.clockify(this.state.timeLeft)}
+                        timeLeft={this.state.timeLeft}
                         handleReset={this.handleReset}
                         currentCounting={this.state.currentCounting}
                         lang={this.props.lang}
@@ -270,6 +270,9 @@ class Pomodoro extends React.Component {
                         handleStartToggle={this.handleStartToggle}
                         counting={this.state.counting}
                         currentTask={this.props.currentTask}
+                        clockify={this.clockify}
+                        workLength={this.state.workLength}
+                        breakLength={this.state.breakLength}
                     />
                     <div id='defaultBtns-group' className='btn-group'>
                         {defaultBtnLists}

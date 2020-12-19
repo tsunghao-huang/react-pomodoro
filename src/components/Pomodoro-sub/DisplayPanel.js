@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export default function DisplayPanel(props) {
     const englishHeading = (
@@ -22,14 +22,25 @@ export default function DisplayPanel(props) {
         </div>
     )
 
+    function handleProgressBar(currentCounting, workLength, breakLength, timeLeft) {
+        const progressBar = document.querySelector('.progress__filled');
+        const duration = (currentCounting === "Work") ? workLength * 60 : breakLength * 60;
+        const percent = (timeLeft / duration) * 100;
+        progressBar.style.flexBasis = `${percent}%`;
+    }
+
+    useEffect(() => {
+        handleProgressBar(props.currentCounting, props.workLength, props.breakLength, props.timeLeft);
+    }, [props.currentCounting, props.workLength, props.breakLength, props.timeLeft])
+
     return (
         <div id='display-panel' aria-label="display panel">
             {/* <p id='timer-label' aria-label={`Currently counting for ${props.currentCounting}`}>{(props.lang === 'en') ? props.currentCounting : props.LANG_MAP[props.currentCounting]}</p> */}
             {(props.lang === 'en') ? englishHeading : mandarinHeading}
-            <div class="progress">
-                <div class="progress__filled"></div>
+            <div className="progress">
+                <div className="progress__filled"></div>
             </div>
-            <p id='time-left' role='timer' aria-label={`Duration for ${props.currentCounting}`}>{props.timeLeft}</p>
+            <p id='time-left' role='timer' aria-label={`Duration for ${props.currentCounting}`}>{props.clockify(props.timeLeft)}</p>
 
             <div id='display-btn-group'>
                 <button

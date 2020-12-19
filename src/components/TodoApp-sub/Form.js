@@ -63,7 +63,7 @@ function Form(props) {
 
             <div id="form-btn-group" className="todo-btn-group">
                 <button type="button" className="btn" onClick={toggleForm}>
-                    <i class="fas fa-times"></i>
+                    <i className="fas fa-times"></i>
                 </button>
                 <button type="submit" className="btn">
                     <i className="fas fa-plus-circle"></i>
